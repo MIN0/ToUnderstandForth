@@ -1,0 +1,542 @@
+
+
+
+
+( # 302 )
+( system memory configuration )
+       100 CONSTANT ORIGIN ( top address )
+       400 CONSTANT B/BUF  ( 1024 bytes per buffer )
+ B/BUF 4 + CONSTANT BFLEN  ( buffer length incl. tags )
+      8000 CONSTANT LIMIT  ( assume 32KB memory )
+LIMIT BFLEN #BUFF * -
+           CONSTANT FIRST  ( top of disk buffers )
+FIRST 60 - CONSTANT UP     ( top of user variables )
+
+
+( # 303 )
+( constants and variables )
+20 CONSTANT BL ( blank code )
+40 CONSTANT C/L ( characters per line )
+0 CONSTANT 0
+1 CONSTANT 1
+2 CONSTANT 2
+3 CONSTANT 3
+1- CONSTANT -1
+50 CONSTANT TIBLEN ( size of text input buffer )
+3 CONSTANT MSGSCR ( screen number of message screen )
+2 CONSTANT #BUFF ( number of disk block buffers )
+VARIABLE USE ( next buffer to use )
+VARIABLE PREV ( most recently referenced buffer )
+FIRST DUP USE ! PREV ! ( initialize variables )
+VARIABLE DISK-ERROR ( storage of disk error status )
+
+
+
+( # 304 )
+( user variables )
+06 USER S0
+08 USER R0
+0A USER TIB
+0C USER WIDTH
+0E USER WARNING
+10 USER FENCE
+12 USER DP
+14 USER VOC-LINK
+16 USER BLK
+18 USER >IN
+1A USER OUT
+1C USER SCR
+1E USER DRIVE
+20 USER CONTEXT
+22 USER CURRENT
+24 USER STATE
+26 USER BASE
+28 USER DPL
+2A USER FLD
+2C USER CSP
+2E USER R#
+30 USER HLD
+
+
+
+( # 305 )
+: ENCLOSE ( a c --- a n1 n2 n3 ;
+            a :top address at which text scanning is started
+            c :delimiter code
+            n1:offset to the first non-delimiter character
+            n2:offset to the first delimiter after text
+            n3:offset to next to the first delimiter after
+               text )
+  OVER DUP >R
+  BEGIN 2DUP C@ = OVER C@ 0= NOT AND WHILE 1+ REPEAT ( c a1 )
+  DUP >R 1+
+  BEGIN 2DUP C@ <> OVER C@ 0= NOT AND WHILE 1+ REPEAT ( c a2 )
+  AWAP DROP R> ( a a2 a1 )
+  R@ - ( n1 ) SWAP R> - ( n2 ) DUP 1+ ( n3 ) ;
+
+
+
+( # 306 )
+: (FIND) ( a1 a2 --- a / ff ;
+  a1:top address of text string to be tested for matching
+  a2:name field address at which dictionary searching is started
+  a :compilation address of the word find
+  ff:unfound, false flag )
+  BEGIN OVER
+  2DUP C@ SWAP C@ 3F AND ( length and smudge bits ) =
+    IF BEGIN 1+ SWAP 1+ SWAP 2DUP C@ SWAP C@ <> UNTIL
+      C@ OVER C@ 7F AND =
+      IF ( found ) SWAP DROP 3 + EXIT THEN 1-
+    ELSE DROP
+    THEN ( exit word ) BEGIN 1+ DUP C@ 80 AND UNIT
+    1+ @ DUP 0=
+      IF ( last word ) 2DROP 0 ( unfound ) EXIT THEN
+  AGAIN ;
+
+
+
+( # 307 )
+: DIGIT ( c n1 --- N2 tf / ff )
+  SWAP 30 - DUP 0<
+  IF 2DROP 0
+  ELSE DUP 9 >
+    IF 7 - DUP 0A <
+      IF 2DROP 0
+      ELSE 2DUP >
+        IF SWAP 1 ELSE 2DROP 0 THEN
+      THEN
+    ELSE 2DUP > IF SWAP DROP 1 ELSE 2DROP 0 THEN
+    THEN
+  THEN ;
+
+
+
+( # 308 )
+: NEGATE ( n --- -n ) 0 SWAP - ;
+: DNEGATE ( d --- -d ) >R >R 0.0 R> R> D- ;
+: +! ( n a --- ) SWAP OVER @ + SWAP ! ;
+
+
+
+( # 309 )
+: FILL ( a n b --- ) <ROT OVER + SWAP
+  DO DUP I C! LOOP DROP ;
+: ERASE ( a n --- ; fill with nulls ) 0 FILL ;
+: BLANKS ( a n --- ; fill with blanks ) BL FILL ;
+: <ROT ( n1 n2 n3 --- n3 n1 n2 ) ROT ROT ;
+: C@ ( n -- c ) @ 0FF AND ;
+: CMOVE ( a1 a2 n --- ) ROT SWAP OVER + SWAP
+  DO I C@ OVER C! 1+ LOOP RROP ;
+: <CMOVE ( a1 a2 n --- ) SWAP OVER + 1- <ROT OVER + 1-
+  DO I C@ OVER C! 1- -1 +LOOP DROP ;
+
+
+
+( # 310 )
+: NOT ( f1 --- f2 ) 0= ;
+: = ( n1 n2 --- f ) - 0= ;
+: <> ( n1 n2 --- f ) = NOT ;
+: > ( n1 n2 --- f ) SWAP < ;
+: U< ( u1 u2 --- f ) 2DUP XOR 0<
+  IF DROP 0< 0= ELSE - 0< THEN ;
+: MIN ( n1 n2 --- n3 ) 2DUP > IF SWAP THEN DROP ;
+: MAX ( n1 n2 --- n3 ) 2DUP < IF SWAP THEN DROP ;
+: +- ( n1 n2 --- n3 ) 0< IF NEGATE THEN ;
+: ABS ( n --- u ) DUP +- ;
+: D+- ( d1 n --- d2 ) DUP 0< IF DNEGATE THEN ;
+: DABS ( d --- ud ) DUP D+- ;
+: ?DUP ( n --- n n / 0 ) DUP IF DUP THEN ;
+
+
+
+( # 311 )
+: S->D ( n --- d ) DUP 0< IF -1 ELSE 0 THEN ;
+: M/MOD ( ud u1 --- u2 u3 ) >R 0 R@ U/ R> SWAP >R U/ R> ;
+: M/ ( ud u1 --- u2 ) OVER >R >R DABS U/ R> R@ XOR
+  +- SWAP R> +- SWAP ;
+: /MOD ( n1 n2 --- n3 n4 ) >R S->D R> R> M/ ;
+: / ( n1 n2 --- n3 ) /MOD SWAP DROP ;
+: 2DUP ( n1 n2 --- n1 n2 n1 n2 ) OVER OVER ;
+: 2DROP ( n1 n2 --- ) DROP DROP ;
+: 2@ ( a --- d ) DUP @ SWAP 2+ @ ;
+
+
+
+( # 312 )
+: 1+ ( n --- n+1 ) 1 + ;
+: 2+ ( n --- n+2 ) 2 + ;
+: 1- ( n --- n-1 ) 1 - ;
+: 2- ( n --- n-2 ) 2 - ;
+: 2* ( n1 --- n2 ) DUP + ;
+
+
+
+( # 313 )
+: HOLD ( c --- ) -1 HLD +! HLD @ C! ;
+: # ( ud1 --- ud2 ) BASE @ M/MOD ROT 9 OVER <
+  IF 7 + THEN 30 + HOLD ;
+: #S ( ud --- 0 0 ) BEGIN # 2DUP OR 0= UNTIL ;
+: <# ( --- ) PAD HLD @ PAD OVER - ;
+: #> ( d --- a  n ) 2DROP HLD @ PAD OVER - ;
+: SIGN ( n ud --- ud ) ROT 0<
+  IF 2D ( - code ) HOLD THEN ;
+
+
+
+( # 314 )
+: COUNT ( a --- a+1 n ) DUP 1+ SWAP C@ ;
+: TYPE ( a c --- ) ?DUP 
+  IF OVER + SWAP DO I C@ EMIT LOOP ELSE DROP THEN ;
+: SPACE ( --- ) BL EMIT ;
+: SPACES ( n --- ) ?DUP IF 0 DO SPACE LOOP THEN ;
+: -TRAILING ( a n1 --- A n2 ; remove trailing blanks )
+  DUP 0 DO 2DUP + 1- C@ BL - IF LEAVE ELSE 1- THEN LOOP ;
+: (.") ( type in-line string )
+  R@ COUNT DUP 1+ R> + >R TYPE ;
+: ." 22 ( " code ) STATE @
+  IF CONPILE (.") WORD C@ 1+ ALLOT
+  ELSE WORD COUNT TYPE THEN ; IMMEDIATE
+
+
+
+( # 315 )
+: D.R ( d n ---) >R SWAP OVER DABS <# #S SIGN #>
+  R> OVER - SPACES TYPE ;
+: D. ( d --- ) 0 D.R SPACE ;
+: .R ( n1 n2 --- ) >R S->D R> D.R ;
+: . ( n --- ) S->R D. ;
+: DECIMAL 0A BASE ! ;
+: HEX 10 BASE ! ;
+
+
+
+( # 316 )
+: (LINE) ( line scr --- a n ; get a screen line )
+  >R C/L B/BUF */MOD R> + BLOCK + C/L ;
+: .LINE ( line scr --- ; type out a screen line )
+  (LINE) -TRAILING TYPE ;
+: LINE ( line --- a n ; get a line of current screen )
+  SCR @ (LINE) ;
+
+
+
+( # 317 )
+: !COMP STATE @ 0= 11 ?ERROR ;
+: ?EXEC STATE @ 12 ??EEROR ;
+: ?STACK SP@ S0 @ SWAT U< 1 ?ERROR SP@ HERE 80 + U< 7 ?ERROR ;
+: ?PAIRS ( n1 n2 --- ) = NOT 13 ?ERROR ;
+: ?LOADING BLK @ 0= 16 ?ERROR ;
+: ?CSP SP@ CSP @ - 14 ?ERROR ;
+: !CSP SP@ CSP ! ;
+
+
+
+( # 318 )
+: COMPILE ?COMP R> DUP 2+ >R @ ;
+: [COMPILE] FIND ?DUP 0= 0 ?ERROR , ; IMMEDIATE
+: LITERAL ( n --- ) STATE @
+  IF COMPILE LIT , THEN ; IMMEDIATE
+: DLITERAL ( d --- ) STATE @
+  IF SWAP [COMPILE] LITERAL [COMPILE] LITERAL THEN ;
+  IMMEDIATE
+: DEFINITIONS CONTEXT @ CURRENT ! ;
+
+
+
+( # 319 )
+: ALLOT ( n --- ) DP +! ;
+: HERE ( --- a ) DP @ ;
+: PAD ( --- a ) HERE 54 + ;
+: LATEST ( --- a ) CURRENT @ @ ;
+: TOGGLE ( a b --- ) OVER C@ XOR SWAP C! ;
+: SMUDGE LATEST 20 TOGGLE ;
+: +ORIGIN ( a --- a' ) ORIGIN + ;
+
+
+
+( # 320 )
+: TRAVERSE ( a1 direction --- a2 ; traverse to the byte with
+             MSB=1 )
+  SWAP BEGIN OVER + 07F OVER C@ < UNTIL SWAP DROP ;
+: NFA ( pfa --- nfa ) 5 - -1 TRAVERSE ;
+: LFA ( pfa --- lfa ) 4 - ;
+: CFA ( pfa --- cfa ) 2- ;
+: PFA ( pfa --- pfa ) 1 TRAVERSE 5 + ;
+
+
+
+( # 321 )
+: [ 0 STATE ! ; IMMEDIATE
+: ] 0C0 STATE ! ; IMMEDIATE
+: ; ?CSP COMPILE ;S SMUDGE [COMPILE] [ ; IMMEDIATE
+: , ( n --- ) HERE ! 2 ALLOT ;
+: C, ( c --- ) HERE C! 1 ALLOT ;
+: VOCABULARY CREATE A081 , ( "blank" word )
+  CURRENT @ CFA , HERE VOC-LINK @ , VOC-LINK !
+  DOES> 2+ CONTEXT ! ; 
+VOCABULARY FORTH IMMEDIATE
+: FORGET ( forget following words in the current vocabulary )
+  CURRENT @ CONTEXT @ - 18 ?ERROR
+  [COMPILE] ' DUP FENCE @ - 15 ?ERROR
+  DUP NFA DP ! LFA @ CURRENT @ ! ;
+
+
+
+( # 322 )
+: <MARK ( --- a ) HERE ;
+: >MARK ( --- a ) HERE 0 , ;
+: <RESOLVE ( a --- ) HERE - , ;
+: >RESOLVE ( a --- ) HERE OVER - SWAP ! ;
+: IF ( --- a 1 ) ?COMP
+  COMPILE 0BRANCH >MARK 1 ; IMMEDIATE
+: THEN ( a 1 --- ) 1 ?PAIRS
+  >RESOLVE ; IMMEDIATE
+: ELSE ( a1 1 --- a2 1 ) 1 ?PAIRS
+  COMPILE BRANCH >MARK SWAP >RESOLVE 1 ; IMMEDIATE
+
+
+
+( # 323 )
+: BEGIN ( --- a 3 ) ?COMP
+  <MARK 3 ; IMMEDIATE
+: AGAIN ( a 3 --- ) 3 ?PAIRS
+  COMPILE BRANCH <RESOLVE ; IMMEDIATE
+: UNTIL ( a 3 --- ) 3 ?PAIRS
+  COMPILE 0BRANCH <RESOLVE ; IMMEDIATE
+: WHILE ( a1 3 --- a2 4 ) 3 ?PAIRS
+  COMPILE 0BRANCH >MARK 4 ; IMMEDIATE
+: REPEAT ( a 4 --- ) 4 ?PAIRS
+  COMPILE BRANCH SWAP <RESOLVE >RESOLVE ; IMMEDIATE
+
+
+
+( # 324 )
+: DO ( --- a 2 : conpiling ; n1 n2 --- : execution )
+  COMPILE (DO) <MARK 2 ; IMMEDIATE
+: LOOP ( a 2 --- : conpiling ; --- : execution )
+  2 ?PAIRS COMPILE (LOOP) <RESOLVE ; IMMEDIATE
+: +LOOP ( a 2 --- : conpiling ; --- : execution )
+  2 ?PAIRS COMPILE (+LOOP) <RESOLVE ; IMMEDIATE
+: LEAVE ( --- ) R> R> DUP R> DROP >R >R >R ;
+: I ( --- n ) R> R@ SWAP >R ;
+: J ( --- n ) R> R> R> R@ <ROT >R >R SWAP >R ;
+: EXIT ?COMP COMPILE ;S ; IMMEDIATE
+
+
+
+( # 325 )
+: PICK ( n1 --- n2 ) 2* SP@ + @ ;
+: RPICK ( n1 --- n2 ) 2* RP@ + @ ;
+: DEPTH ( --- n ) S0 @ SP@ 2+ - 2/ ;
+: ROLL ( n --- ) >R R@ PICK SP@ DUP 2+ R> 2* <CMOVE
+  DROP ;
+: <ROLL ( n --- ) >R DUP SP@ DUP 2- R@ 1+ 2* CMOVE
+  SP@ R> 2* + ! ;
+
+
+
+( # 326 )
+: FIND ( --- a / 0 )
+  BL WORD CONTEXT @ @ (FIND) DUP 0=
+  IF DROP HERE LATEST (FIND) THEN ;
+: ' ( --- a : EXECUTION , --- : COMPILING )
+  FIND ?DUP 0= 0 ?ERROR [COMPILE] LITERAL ; IMMEDIATE
+
+
+
+( # 327 )
+: WORD ( c --- a ) BLK @
+  IF BLK @ BLOCK ELSE TIB @ THEN
+  >IN @ + SWAP ENCLOSE HERE 22 BLANKS >IN +!
+  OVER - >R R@ HERE C! + HERE 1+ R> CMOVE HERE ;
+: ( ( skip input stream until right parenthesis )
+  29 ( code of right parenthesis ) WORD DROP ; IMMEDIATE
+
+
+
+
+( # 328 )
+: EXPECT ( a n --- ) OVER + OVER
+  DO KEY DUP 8 ( backspace code ) =
+    IF OVER I = DUP R> 2- + >R -
+    ELSE DUP 0D ( carriage return code ) =
+      IF LEAVE DROP BL 0
+      ELSE DUP
+      THEN
+    I C! 0 I 1+ !
+    THEN EMIT
+  LOOP DROP ;
+: QUERY ( --- ) TIB @ TIBLEN EXPECT 0 >IN ! ;
+
+
+
+( # 329 )
+8081 HERE
+: x   BLK @
+  IF ( disk ) 1 BLK +! 0 >IN ! ?EXEC R> DROP
+  ELSE ( terminal ) R> DROP
+  THEN ;
+! IMMEDIATE
+( x is replaced by null code )
+
+  null
+
+
+
+( # 330 )
+: CONVERT ( d a --- d' a' )
+  BEGIN 1+ DUP >R C@ BASE @ DIGIT
+  WHILE SWAP BASE @ U* DROP ROT BASE @ U* D+
+    DPL @ 1+ IF 1 DPL +! THEN R>
+  REPEAT R> ;
+: NUMBER ( a --- d ) 0.0 ROT DUP 1+ C@ 2D ( - code )
+  = DUP >R + -1
+  BEGIN DPL ! CONVERT DUP C@ BL -
+  WHILE DUP C@ 2E ( . code ) - 0 ?ERROR 0 REPEAT
+  DROP R> IF DNEGATE THEN ;
+
+
+
+( # 331 )
+: +BUF ( a1 --- a2 f : advance to next buffer address )
+  BFLEN + DUP LIMIT = 
+  IF DROP FIRST THEN DUP PREV @ - ;
+: UPDATE ( mark the buffer pointed to by PREV as update )
+  PREV @ @ 8000 ( set most sigunificant bit ) OR PREV ! ;
+: EMPTY-BUFFERS ( clear block buffer without writing to disk )
+  FIRST LIMIT OVER - ERASE ;
+: SAVE-BUFFERS ( write undated block buffer to disk )
+  #BUFF 1+ 0 DO 7FFF BUFFER DROP LOOP ;
+: DR0  0 DRIVE ! ;  ( select drive 0 )
+: DR1  1 DRIVE ! ;  ( select drive 1 )
+
+
+
+( # 332 )
+: R/W ( a n f --- ; read/write disk,
+        a=buffer address, n=block no.,
+        f=direction flag, read if f=1, write if f=0 )
+  >R DRIVE @ <ROT REC/BLK SWAP OVER * R>
+  IF READ-REC ELSE WRITE-REC THEN 1 AND DISK-ERROR ! ;
+
+
+
+( # 333 )
+: BUFFER ( n --- s ; scquire buffer for block n )
+  USE @ DUP >R
+  BEGIN +BUF UNTIL USE ! R@ 0<
+    IF ( updated ) R@ 2+ ( data area ) R@ @ 7FFF AND ( blk # )
+      0 R/W ( write ) 
+    THEN
+  R@ ! R@ PREV ! R> 2+ ( data area ) ;
+
+
+
+( # 334 )
+: BLOCK ( n --- a ; get buffer address for block n )
+  OFFSET @ + >R PREV @ DUP @ R@ - 2* ( disregard UPDATE bit )
+  IF ( not PREV )
+    BEGIN +BUF 0= ( true upon reaching PREV )
+      IF DROP R@ BUFFER DUP R@ 1 R/W ( read ) 2- THEN
+      DUP @ R@ - 2* 0= 
+    UNTIL DUP PREV !
+  THEN R> DROP 2+ ( data area ) ;
+
+
+
+( # 335 )
+: INTERPRET ( interpret or compile words in input stream )
+  BEGIN FIND ?DUP
+    IF ( found ) STATE @ <
+      IF , ELSE EXECUTE THEN ?STACK
+    ELSE HERE NUMBER DPL @ 1+
+      IF [COMPILE] DLITERAL
+      ELSE DROP [COMPILE] LITERAL
+      THEN ?STACK
+    THEN
+  AGAIN ;
+
+
+
+( # 336 )
+: QUIT ( restart, interpret from terminal )
+  0 BLK ! [COMPILE] [
+  BEGIN RP! CR QUERY INTERPRET
+    STATE @ 0= IF ." OK" THEN
+  AGAIN ;
+: ABORT ( clear stacks, warm start )
+  SP! DECIMAL DR0 [COMPILE] FORTH DEFINITION QUIT ;
+
+
+
+( # 337 )
+: MESSAGE ( n --- ; output n'th message )
+  WARNING @
+  IF ?DUP
+    IF MESSAGE OFFSET @ - .LINE SPACE THEN
+  ELSE ." MSG# " .
+  THEN ;
+: ERROR ( n --- ; output n'th error message then quit
+                  depending on the value of WARNING )
+  WARNING @ 0<
+  IF ABORT THEN HERE COUNT TYPE ."  ? " MESSAGE SP!
+    BLK @ ?DUP IF >IN @ SWAP
+  THEN QUIT ;
+: ?ERROR ( f n --- ; execute ERROR on true flag )
+  SWAP IF ERROR ELSE DROP THEN ;
+
+
+
+( # 338 )
+: LOAD ( interpret screen )
+  BLK @ >R >IN @ >R 0 >IN ! BLK !
+  INTERPRET R> >IN ! R> BLK ! ;
+: --> ( continue interpreting next screen )
+  ?LOADING 0 >IN ! 1 BLK +! ; IMMEDIATE
+
+
+
+( # 339 )
+: ID. ( nfa --- ; print word's name )
+  PAD 22 BLANKS DUP PFA LFA OVER - PAD SWAP CMOVE PAD COUNT
+  1F AND TYPE SPACE ;
+: (CREATE) FIND ?DUP
+  IF CR 3 - ID. -1 TRAVERSE ID. 4 MESSAGE ( redefinition )
+  SPACE THEN HERE DUP C@ WIDTH @ 1+ ALLOT ( get area for name )
+  DUP 0A0 TOGGLE ( smudge ) HERE 1- 80 TOGGLE ( end of name )
+  LATEST , ( link field ) CURRENT @ ! ( link )
+  HERE 2+ , ( compilation field ) ;
+: (;CODE) R> LATEST 1 TRAVERSE 3 + ( compilation address )
+  ! ;
+
+
+
+( # 340 )
+: 79-STANDARD ;
+
+HERE ' FORTH 6 + !
+HERE FENCE !
+HERE INITDP !
+' FORTH 4 + DUP CONTEXT ! CURRENT !
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
