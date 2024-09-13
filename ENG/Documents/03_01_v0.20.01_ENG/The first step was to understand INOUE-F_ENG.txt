@@ -45,6 +45,19 @@ and I decided to change the INOUE-FORTH version that I had developed until the h
 
 Others were observed to have some defects. More time is expected to be needed to correct these.
 
+
+////////////////// Process flow of ToUnderstandFORTH //////////////////
+1) The most first C++ file is executed. In it, the following is executed and the ASM file is called.
+       Call_Rtn = TestProc(&c);.
+2) In the ASM file, the execution starts from the first address ( ORIG:: ) of TestProc, which is the first procedure of the first .CODE.
+3) The FORTH processor is executed in the ASM file.
+4) When executing character input/output/file input/key input confirmation/trace mode on/off/end of execution, call call_C_entry is called to terminate ASM processing and return to C++.
+5) In C++, execution moves on after Call_Rtn = TestProc(&c);. COM_NO in the &C structure checks the number (value in register RDX) of the process to be performed (case in switch statement), SCANVAL checks the value (value in register RAX), and the specified process is executed.
+6) Now that processing has been completed, the next processing is performed, and by executing C_Rtn = call_C_exit(&c);, the continuation address of the previous execution in the ASM file is called.
+7) The process moves to 3), and the continuation of the FORTH processing system is executed in the ASM file.
+
+
+
 V0.20.01 2024/09/13
 
 
