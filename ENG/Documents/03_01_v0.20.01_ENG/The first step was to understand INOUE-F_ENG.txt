@@ -1,0 +1,32 @@
+The first step was to understand INOUE-FORTH.
+  The basic part of INOUE-FORTH was written in MASM, and the rest in FORTH. Therefore, it was very difficult for a beginner who did not have a good understanding of FORTH itself to create an executable FORTH processing system from this information.
+  I feel a sense of respect for the seniors who would have created their respective FORTH processing systems using only the child books of the time.
+  In the end, I gave up continuing development because the development I was doing was still riddled with syntax errors.
+
+Next, I found a PDF document of FIG-FORTH written entirely in MASM for the 8086 CPU version, and changed the INOUE-FORTH version I had developed halfway through to the FIG-FORTH version.
+  First, this was the first time error messages could be eliminated.
+  Second, the initial display screen appeared on the screen normally, and the execution result appeared on the screen by inputting the ENTER key after key input.
+    Example.)
+       ToUnderstandFORTH (Fig-Forth X64) 0.1
+       <<The screen waits for a key input here.>>
+
+
+  So far, the results appear normally as follows.
+    (1) Numeric value, +,-,. (dot) are used, normal results are displayed.
+    (2) Displaying a string on the screen ( input contents: .” AAA “ [enter] Output contents: AAA OK )
+    (3) Each word to be executed and the register value at that time are displayed on the screen with execution by word TRACE_ON, and return to the original key input screen by TRACE_OFF.
+          Example: Input contents: TRACE_ON 1 . TRACE_OFF [enter]. 
+          Output contents: (Omitted because the amount is too large, but 1 . is analyzed by WORD, PFIND, etc., and the status of execution is displayed)
+    (4) New words were added, but mistakes in character counts and word names occurred. Words registered in the dictionary were listed from the beginning, and words were added to display error messages when errors or other problems occurred along the way.
+       WORD_ADDR_OF_SERCH_WORD: = 7ff630642d48
+       WORD_ADDR_OF_SERCH_WORD: = 7ff630642d18
+       WORD_ADDR_OF_SERCH_WORD: = 7ff630642ce4
+          (Nothing is displayed since the end was reached)
+
+Others were observed to have some defects. More time is expected to be needed to correct these.
+
+V0.20.01 2024/09/13
+
+
+Translated with DeepL.com (free version)
+
