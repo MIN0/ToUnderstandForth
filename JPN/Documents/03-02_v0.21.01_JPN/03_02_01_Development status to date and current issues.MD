@@ -11,7 +11,7 @@
     
 　　Documents/01_01_Inoue-Forth_SorceCode
   
-・次に、INOUE-FORTHの元となったFIG-FORTH（8086版）（インテル8086CPU版のソースコードで、すべてMASMで記述されていた）のPDF資料を見つけ、それ以降はFIG-FORTH（8086版）での開発に変更した。  
+## ・次に、INOUE-FORTHの元となったFIG-FORTH（8086版）（インテル8086CPU版のソースコードで、すべてMASMで記述されていた）のPDF資料を見つけ、それ以降はFIG-FORTH（8086版）での開発に変更した。  
   
 　まず、MASMだけで書かれており、これで初めてソースコードのコンパイル時に発生していたエラーメッセージが表示されなくなった。  
 　次に、初期表示画面が正常に画面に現れ、キー入力後、ENTERキーの入力で実行結果が画面上に現れるようになった。  
@@ -26,10 +26,10 @@
   
   
   
-・注意すべき点があります。現在はWindows11の環境で、Visual Studio 2022 + MASM（６４ビット）のDebugモードで開発しています。  
+## ・注意すべき点があります。現在はWindows11の環境で、Visual Studio 2022 + MASM（６４ビット）のDebugモードで開発しています。  
 　Visual Studio 2022 のDebugモードなので、/Sourceにある1st_Driver9_FIXED.cppやMainEngine9_FIXED.asmから作成したProject9_FORTH_FULL_FIXED.exeは私が使っているパソコン上でしか動作しませんでした。他のPC上のVisual Studio 2022では動作しません。この記事を読んでいる方で動作を確認するときは、あなたのPCでVisual Studio 2022の環境を準備し、以下の手順でビルドを行い、デバッグを行う必要があります。  
   
-＜参考例＞  
+## ＜参考例＞  
 Visual Studio 2022でMASM(Microsoft Macro Assembler)を動かせるようにするには、Visual Studio 2022で新規プロジェクトを立ち上げてから以下の設定をおこなう必要があります。ここではプロジェクト名はProject9_FullTest_FIXEDとします。  
   
 　１）画面右側の「ソリューションエクスプローラー」の左に三角形のマークがついたProject9_FullTest_FIXEDを右クリック  
