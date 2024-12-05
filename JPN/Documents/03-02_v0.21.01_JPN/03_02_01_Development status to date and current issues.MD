@@ -46,16 +46,20 @@ Visual Studio 2022でMASM(Microsoft Macro Assembler)を動かせるようにす�
   
 　３）ソリューションエクスプローラーで「ソースファイル」を右クリック  
 　４）現れたウインドウで「追加」→「既存の項目」→ディレクトリを選んで以下のファイルを追加していく。  
-　　　　1st_Driver9_FIXED.cpp　　 　→C++で書かれたソースコード  
-　　　　MainEngine9_FIXED.asm　　　→アセンブラ（インテルｘ６４）で書かれたソースコード 
+```  
+       1st_Driver9_FIXED.cpp　　 　→C++で書かれたソースコード  
+　　　　MainEngine9_FIXED.asm　　　→アセンブラ（インテルｘ６４）で書かれたソースコード  
+```  
   
 ![Setup_screen_1-2](https://github.com/MIN0/ToUnderstandForth/blob/main/JPN/Documents/03-02_v0.21.01_JPN/pict/Setup_screen_1-2.png)
 
 
 　５）ソリューションエクスプローラーの「ソースファイル」に表示されているMainEngine9_FIXED.asmにカーソルを合わせて右クリック 
 　６）「プロパティ」をクリックして、「構成プロパティ」「全般」で  
+```  
 　　　　　　「ビルドから除外」で「いいえ」  
 　　　　　　「項目の種類」で「Microsoft Macro Assembler」を選択、「OK」をクリックする。  
+```  
   
 ![Setup_screen_1-3](https://github.com/MIN0/ToUnderstandForth/blob/main/JPN/Documents/03-02_v0.21.01_JPN/pict/Setup_screen_1-3.png)  
   
@@ -71,6 +75,7 @@ Visual Studio 2022でMASM(Microsoft Macro Assembler)を動かせるようにす�
   
 ![Execution screen_1-6](https://github.com/MIN0/ToUnderstandForth/blob/main/JPN/Documents/03-02_v0.21.01_JPN/pict/Execution%20screen_1-6.png)  
 
+  
   
 これで「 ToUnderstandFORTH  (Fig-Forth X64) Rev 0.21.01 」が画面に表示されれば成功です。  
 
