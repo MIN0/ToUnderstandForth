@@ -3,7 +3,7 @@
 FORTHに関しての文献で、私が知っているものは１９９０年ごろに書かれた文献が多いのですが、いくつか今でも読むことができます。ここでは簡単な説明にとどめますので、詳しくはそちらを参照願います。
 
 ・標準FORTH　（日本語のみ。日本の図書館のインターネットライブラリから見ることができます。使用には登録が必要です。）
-https://ndlsearch.ndl.go.jp/　　　　　
+https://ndlsearch.ndl.go.jp/help　　　　　
 
 （日本語画面）
 https://ndlsearch.ndl.go.jp/search?cs=bib&collapse=null&display=panel&from=0&size=20&keyword=%E6%A8%99%E6%BA%96FORTH&f-ht=ndl&f-ht=library
