@@ -1,74 +1,73 @@
-�����܂ł̊J���󋵂ƌ��݂̉ۑ�
+◎今までの開発状況と現在の課題  
 
-�E�ŏ���INOUE-FORTH�̗�������n�܂���
-�@INOUE-FORTH�͓��{�łP�X�W�O�N��ɏo�ł��ꂽ�{�u�W��FORTH�v�����ɂȂ��Ă���܂��B�J���̂��߂ɁA���͎���͂ł��̖{���炱�̃\�[�X�R�[�h�������ʂ����Ƃ���n�߂܂����B
-�@INOUE-FORTH�͊�{������MASM(Microsoft Macro Assembler)�̃A�Z���u���ŁA�c���FORTH�̃\�[�X�R�[�h�ŋL�q����Ă��܂����B���̂��߁AFORTH���܂��悭�킩���Ă��Ȃ����S�҂������̃\�[�X�R�[�h������s�\��FORTH�����n�ւƏ���������͔̂��ɍ���ł����B  
-�@���͂P�X�W�O�N�㓖���ɂ��̖{�����ł��ꂼ���FORTH�����n�����グ������y���ɑ��h�̔O�������܂��B
-�@���ǁA����INOUE-FORTH���Č����悤�Ƃ��܂������AFORTH�ŋL�q���ꂽ�\�[�X�R�[�h��MASM�̃A�Z���u���ɏ��������邱�Ƃ��ł��܂���ł����B�������悤���܂˂ō쐬�����A�Z���u���̃\�[�X�R�[�h�ł͂ǂ����Ă��G���[���������A���ǎ��͊J���̌p����f�O���܂����B
-�@�ł����A���͈�コ��̏����ꂽ�{�ł���u�W��FORTH�v���炽������̂��Ƃ��w�т܂����B���̖{��FORTH����ɂ��ċM�d�ȏ��������Ă���܂����B�uFORTH��ABC�v�Ɏn�܂�A�uFORTH�V�X�e���̓����\���v�A�uFORTH���[�h�v�A�uFORTH�v���O�����̍����v�A�uFORTH����̊g���v�A�uFORTH�V�X�e���̃C���v�������e�[�V�����v�A�����āuFORTH83�iFORTH79��FORTH83�Ƃ̑���_�j�v�ȂǁB���̖{���Ȃ���Ύ���FIG-FORTH(8086��)�𗝉����邱�Ƃ͂ł��Ȃ������ł��傤�B���ɂƂ��đ�؂ȋ��ȏ��ł����B���͂��̂��ƂɊ��ӂ��Ă��܂��B
-�@
-�@�����u�W��FORTH�v�ɂ��ẮA�ڂ����͈ȉ����Q�Ƃ��������i�������A���{��݂̂ŏ����ꂽ�����ł��j
-
-�@�@Documents/01_01_Inoue-Forth_SorceCode
-
-
-�E���ɁAINOUE-FORTH�̌��ƂȂ���FIG-FORTH�i8086�Łj�i�C���e��8086CPU�ł̃\�[�X�R�[�h�ŁA���ׂ�MASM�ŋL�q����Ă����j��PDF�����������A����ȍ~��FIG-FORTH�i8086�Łj�ł̊J���ɕύX�����B  
-
-�@�܂��AMASM�����ŏ�����Ă���A����ŏ��߂ă\�[�X�R�[�h�̃R���p�C�����ɔ������Ă����G���[���b�Z�[�W���\������Ȃ��Ȃ����B
-�@���ɁA�����\����ʂ�����ɉ�ʂɌ���A�L�[���͌�AENTER�L�[�̓��͂Ŏ��s���ʂ���ʏ�Ɍ����悤�ɂȂ����B
-�@���̓^�C�g�����b�Z�[�W�̕\�����ł���悤�ɂȂ����̂��m�F���āA����ȍ~�̏C���ł̓v���O�����̖��̂��uToUnderstandFORTH�v�ɕύX���܂����B�ȉ��͌��݂̕\����ʂł��B
-�@�@
-�@�@�@�@ToUnderstandFORTH  (Fig-Forth X64) Rev 0.21.01
-�@�@�@�@�������ŃL�[���͑҂��ƂȂ遄
-
-�@�����uFIG-FORTH�i8086�Łj�v�ɂ��ẮA�ڂ����͈ȉ����Q�Ƃ��������i�������A�p��݂̂ŏ����ꂽ�����ł��j
-
-�@�@Documents/01_02_Fig-Forth_SorceCode
-
-
-
-�E���ӂ��ׂ��_������܂��B���݂�Windows11�̊��ŁAVisual Studio 2022 + MASM�i�U�S�r�b�g�j��Debug���[�h�ŊJ�����Ă��܂��B
-�@Visual Studio 2022 ��Debug���[�h�Ȃ̂ŁA/Source�ɂ���1st_Driver9_FIXED.cpp��MainEngine9_FIXED.asm����쐬����Project9_FORTH_FULL_FIXED.exe�͎����g���Ă���p�\�R����ł������삵�܂���ł����B����PC���Visual Studio 2022�ł͓��삵�܂���B���̋L����ǂ�ł�����œ�����m�F����Ƃ��́A���Ȃ���PC��Visual Studio 2022�̊����������A�ȉ��̎菇�Ńr���h���s���A�f�o�b�O���s���K�v������܂��B
-
-���Q�l�၄
-Visual Studio 2022��MASM(Microsoft Macro Assembler)�𓮂�����悤�ɂ���ɂ́AVisual Studio 2022�ŐV�K�v���W�F�N�g�𗧂��グ�Ă���ȉ��̐ݒ�������Ȃ��K�v������܂��B�����ł̓v���W�F�N�g����Project9_FullTest_FIXED�Ƃ��܂��B
-
-�@�P�j��ʉE���́u�\�����[�V�����G�N�X�v���[���[�v�̍��ɎO�p�`�̃}�[�N������Project9_FullTest_FIXED���E�N���b�N
-�@�Q�j���j���[���́u�r���h�̈ˑ��֌W�iB)�v���u�r���h�̃J�X�^�}�C�Y�v�ŁuMASM�v�Ə����ꂽ�{�b�N�X���N���b�N�A�uOK�v���N���b�N����B
-
-
-�@�@Setup_screen_1-1
-
+・最初にINOUE-FORTHの理解から始まった  
+　INOUE-FORTHは日本で１９８０年代に出版された本「標準FORTH」が元になっております。開発のために、私は手入力でこの本からこのソースコードを書き写すことから始めました。  
+　INOUE-FORTHは基本部分はMASM(Microsoft Macro Assembler)のアセンブラで、残りはFORTHのソースコードで記述されていました。そのため、FORTHがまだよくわかっていない初心者がこれらのソースコードから実行可能なFORTH処理系へと書き換えるのは非常に困難でした。    
+　私は１９８０年代当時にこの本だけでそれぞれのFORTH処理系を作り上げた諸先輩方に尊敬の念を感じます。  
+　結局、私はINOUE-FORTHを再現しようとしましたが、FORTHで記述されたソースコードをMASMのアセンブラに書き換えることができませんでした。私が見よう見まねで作成したアセンブラのソースコードではどうしてもエラーが多発し、結局私は開発の継続を断念しました。  
+　ですが、私は井上さんの書かれた本である「標準FORTH」からたくさんのことを学びました。この本はFORTH言語について貴重な情報を教えてくれました。「FORTHのABC」に始まり、「FORTHシステムの内部構造」、「FORTHワード」、「FORTHプログラムの作り方」、「FORTH言語の拡張」、「FORTHシステムのインプリメンテーション」、そして「FORTH83（FORTH79とFORTH83との相違点）」など。この本がなければ次のFIG-FORTH(8086版)を理解することはできなかったでしょう。私にとって大切な教科書でした。私はそのことに感謝しています。  
+　  
+　文献「標準FORTH」については、詳しくは以下を参照ください（ただし、日本語のみで書かれた文献です）  
+    
+　　Documents/01_01_Inoue-Forth_SorceCode
+  
+・次に、INOUE-FORTHの元となったFIG-FORTH（8086版）（インテル8086CPU版のソースコードで、すべてMASMで記述されていた）のPDF資料を見つけ、それ以降はFIG-FORTH（8086版）での開発に変更した。  
+  
+　まず、MASMだけで書かれており、これで初めてソースコードのコンパイル時に発生していたエラーメッセージが表示されなくなった。  
+　次に、初期表示画面が正常に画面に現れ、キー入力後、ENTERキーの入力で実行結果が画面上に現れるようになった。  
+　私はタイトルメッセージの表示ができるようになったのを確認して、それ以降の修正ではプログラムの名称を「ToUnderstandFORTH」に変更しました。以下は現在の表示画面です。  
+　　  
+　　　　ToUnderstandFORTH  (Fig-Forth X64) Rev 0.21.01  
+　　　　＜ここでキー入力待ちとなる＞  
+  
+　文献「FIG-FORTH（8086版）」については、詳しくは以下を参照ください（ただし、英語のみで書かれた文献です）  
+  
+　　Documents/01_02_Fig-Forth_SorceCode  
+  
+  
+  
+・注意すべき点があります。現在はWindows11の環境で、Visual Studio 2022 + MASM（６４ビット）のDebugモードで開発しています。  
+　Visual Studio 2022 のDebugモードなので、/Sourceにある1st_Driver9_FIXED.cppやMainEngine9_FIXED.asmから作成したProject9_FORTH_FULL_FIXED.exeは私が使っているパソコン上でしか動作しませんでした。他のPC上のVisual Studio 2022では動作しません。この記事を読んでいる方で動作を確認するときは、あなたのPCでVisual Studio 2022の環境を準備し、以下の手順でビルドを行い、デバッグを行う必要があります。  
+  
+＜参考例＞  
+Visual Studio 2022でMASM(Microsoft Macro Assembler)を動かせるようにするには、Visual Studio 2022で新規プロジェクトを立ち上げてから以下の設定をおこなう必要があります。ここではプロジェクト名はProject9_FullTest_FIXEDとします。  
+  
+　１）画面右側の「ソリューションエクスプローラー」の左に三角形のマークがついたProject9_FullTest_FIXEDを右クリック  
+　２）メニュー内の「ビルドの依存関係（B)」→「ビルドのカスタマイズ」で「MASM」と書かれたボックスをクリック、「OK」をクリックする。  
+  
+  
+　　Setup_screen_1-1
 
 
 
 
-�@�R�j�\�����[�V�����G�N�X�v���[���[�Łu�\�[�X�t�@�C���v���E�N���b�N
-�@�S�j���ꂽ�E�C���h�E�Łu�ǉ��v���u�����̍��ځv���f�B���N�g����I��ňȉ��̃t�@�C����ǉ����Ă����B
-�@�@�@�@1st_Driver9_FIXED.cpp�@�@ �@��C++�ŏ����ꂽ�\�[�X�R�[�h
-�@�@�@�@MainEngine9_FIXED.asm�@�@�@���A�Z���u���i�C���e�����U�S�j�ŏ����ꂽ�\�[�X�R�[�h
-
+  
+　３）ソリューションエクスプローラーで「ソースファイル」を右クリック  
+　４）現れたウインドウで「追加」→「既存の項目」→ディレクトリを選んで以下のファイルを追加していく。  
+　　　　1st_Driver9_FIXED.cpp　　 　→C++で書かれたソースコード  
+　　　　MainEngine9_FIXED.asm　　　→アセンブラ（インテルｘ６４）で書かれたソースコード 
+  
 Setup_screen_1-2
 
 
-�@�T�j�\�����[�V�����G�N�X�v���[���[�́u�\�[�X�t�@�C���v�ɕ\������Ă���MainEngine9_FIXED.asm�ɃJ�[�\�������킹�ĉE�N���b�N
-�@�U�j�u�v���p�e�B�v���N���b�N���āA�u�\���v���p�e�B�v�u�S�ʁv��
-�@�@�@�@�@�@�u�r���h���珜�O�v�Łu�������v
-�@�@�@�@�@�@�u���ڂ̎�ށv�ŁuMicrosoft Macro Assembler�v��I���A�uOK�v���N���b�N����B
-
+　５）ソリューションエクスプローラーの「ソースファイル」に表示されているMainEngine9_FIXED.asmにカーソルを合わせて右クリック 
+　６）「プロパティ」をクリックして、「構成プロパティ」「全般」で  
+　　　　　　「ビルドから除外」で「いいえ」  
+　　　　　　「項目の種類」で「Microsoft Macro Assembler」を選択、「OK」をクリックする。  
+  
 Setup_screen_1-3
 Setup_screen_1-4
 
 
-
-�ݒ肪��������΁A���̂V�j�̏��ԂŎ��s���܂��B
-
-�@�V�j�r���h�i�\�����[�V�����̃r���h�j���f�o�b�O�i�f�o�b�O�̊J�n�j
-
+  
+設定が完了すれば、次の７）の順番で実行します。  
+  
+　７）ビルド（ソリューションのビルド）→デバッグ（デバッグの開始）  
+  
 Execution screen_1-5
 Execution screen_1-6
 
-
-����Łu ToUnderstandFORTH  (Fig-Forth X64) Rev 0.21.01 �v����ʂɕ\�������ΐ����ł��B
+  
+これで「 ToUnderstandFORTH  (Fig-Forth X64) Rev 0.21.01 」が画面に表示されれば成功です。  
 
 
