@@ -38,7 +38,7 @@ Visual Studio 2022でMASM(Microsoft Macro Assembler)を動かせるようにす�
 　２）メニュー内の「ビルドの依存関係（B)」→「ビルドのカスタマイズ」で「MASM」と書かれたボックスをクリック、「OK」をクリックする。  
   
   
-　　Setup_screen_1-1
+　　![Setup_screen_1-1](https://github.com/MIN0/ToUnderstandForth/blob/main/JPN/Documents/03-02_v0.21.01_JPN/pict/Setup_screen_1-1.png)
 
 
 
