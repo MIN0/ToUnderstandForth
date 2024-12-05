@@ -1,138 +1,138 @@
-���@ToUnderstandFORTH�̊ȒP�ȉ���@
+◎　ToUnderstandFORTHの簡単な解説　
 
-FORTH�Ɋւ��Ă̕����ŁA�����m���Ă�����̂͂P�X�X�O�N����ɏ����ꂽ�����������̂ł����A���������ł��ǂނ��Ƃ��ł��܂��B�����ł͊ȒP�Ȑ����ɂƂǂ߂܂��̂ŁA�ڂ����͂�������Q�Ɗ肢�܂��B
+FORTHに関しての文献で、私が知っているものは１９９０年ごろに書かれた文献が多いのですが、いくつか今でも読むことができます。ここでは簡単な説明にとどめますので、詳しくはそちらを参照願います。
 
-�E�W��FORTH�@�i���{��̂݁B���{�̐}���ق̃C���^�[�l�b�g���C�u�������猩�邱�Ƃ��ł��܂��B�g�p�ɂ͓o�^���K�v�ł��B�j
-https://ndlsearch.ndl.go.jp/�@�@�@�@�@
+・標準FORTH　（日本語のみ。日本の図書館のインターネットライブラリから見ることができます。使用には登録が必要です。）
+https://ndlsearch.ndl.go.jp/　　　　　
 
-�i���{���ʁj
+（日本語画面）
 https://ndlsearch.ndl.go.jp/search?cs=bib&collapse=null&display=panel&from=0&size=20&keyword=%E6%A8%99%E6%BA%96FORTH&f-ht=ndl&f-ht=library
 
-�i�p���ʁj
+（英語画面）
 https://ndlsearch.ndl.go.jp/en/search?cs=bib&collapse=null&display=panel&from=0&size=20&keyword=forth+inoue&f-ht=ndl
 
 
-�EStarting FORTH�@�iWEB�łȂ̂Ŋe����œǂނ��Ƃ��ł��܂��j
+・Starting FORTH　（WEB版なので各国語で読むことができます）
 https://www.forth.com/starting-forth/0-starting-forth/
 
 
-�EA Beginner's Guide to Forth�@�@�i�p��̂݁j
+・A Beginner's Guide to Forth　　（英語のみ）
 https://galileo.phys.virginia.edu/classes/551.jvn.fall01/primer.htm
 
 
-���ƁAMSX�p�ɊJ�����ꂽFORTH��WEB������܂��i��������āA���͎���GitHub��Ɉړ����Ă��܂��j
+あと、MSX用に開発されたFORTHのWEBもあります（事情があって、今は私のGitHub上に移動しています）
 
-�EH-FORTH_MSX
+・H-FORTH_MSX
 https://github.com/MIN0/H-FORTH_MSX
 
 
 
-���ȒP�ȋt�|�[�����h�L�@�ƃ��[�h�̐���
-�E�ʏ�̎Z�p���Z�̓|�[�����h�L�@�ŁA�ȉ��̂悤�ɍs���܂��B
+◎簡単な逆ポーランド記法とワードの説明
+・通常の算術演算はポーランド記法で、以下のように行われます。
 
   5 + 4 - 3 = 6
 
-�EFORTH����̓X�^�b�N���g���āA�t�|�[�����h�L�@�ōs���܂��B
+・FORTH言語はスタックを使って、逆ポーランド記法で行われます。
 
-�@FORTH�̃X�^�b�N����ɂ�鐔�l���Z�͈ȉ��ɂȂ�܂��B
-�@�@�P�j���l���P�Ɛ��l���Q���X�^�b�N�ɐς܂��B
-�@�@�Q�j���[�h�u�{�v�����l���P�Ɛ��l���Q�����o���ĉ��Z����B���l���P�Ɛ��l���Q�̓X�^�b�N�����������ԂɂȂ�܂��B
-�@�@�R�j���[�h�u�{�v�̉��Z�ŋ��߂�ꂽ���l���R���X�^�b�N�ɐς܂��B
+　FORTHのスタック操作による数値演算は以下になります。
+　　１）数値ｎ１と数値ｎ２がスタックに積まれる。
+　　２）ワード「＋」が数値ｎ１と数値ｎ２を取り出して演算する。数値ｎ１と数値ｎ２はスタックから消えた状態になります。
+　　３）ワード「＋」の演算で求められた数値ｎ３がスタックに積まれる。
 
-�@���̎��̃X�^�b�N�̏�Ԃ�}�Ŏ����܂��B����l���X�^�b�N�ɐςݏグ����ƁA�}�ł͍ŏ�ʂ̐��l�̏�ɂ��̐��l����ɍڂ��āA���̐��l���ŏ�ʂƂȂ�܂��B
-�@�@�@���ӂP�j�@���l�Ɂi�j�����Ԃ����Ă���ꍇ�͂��ꂪ�X�^�b�N�̍ŏ�ʂł��邱�Ƃ������B
-�@�@�@���ӂQ�j�@-----�̓X�^�b�N�̒�ӂŁA�X�^�b�N�����ׂēf���o���Ƌ�ɂȂ邱�Ƃ�\���B
-�@�@�@���ӂR�j�@�����ł̐��l�ȊO�́u�{�v��u�[�v�A�u���v�̓��[�h�ƌĂ΂��B���[�h�̓X�^�b�N��̃f�[�^�̏�����l�X�ȏ��������s���A��`���邱�Ƃ��ł���B
+　その時のスタックの状態を図で示します。一つ数値がスタックに積み上げられると、図では最上位の数値の上にその数値が上に載って、その数値が最上位となります。
+　　　注意１）　数値に（）がかぶさっている場合はそれがスタックの最上位であることを示す。
+　　　注意２）　-----はスタックの底辺で、スタックをすべて吐き出すと空になることを表す。
+　　　注意３）　ここでの数値以外の「＋」や「ー」、「＊」はワードと呼ばれる。ワードはスタック上のデータの処理や様々な処理を実行し、定義することができる。
 
 a)
-  4 5 +  �ł���΁A�T�ƂS�𑫂��Č��ʂ͂X�B
+  4 5 +  であれば、５と４を足して結果は９。
 
              (5)
    (4)  -->   4   -->  +  -->  (9)
   -----     -----             -----
 
 b)
-  3 9 -  �ł���΁A�X����R�������Č��ʂ͂U�B
+  3 9 -  であれば、９から３を引いて結果は６。
 
              (9)
    (3)  -->   3   -->  -  -->  (6)
   -----     -----             -----
 
 c)
-  3 4 5 + -  �ł���΁A�����͍�����E�Ɏ��s����܂��B���l���X�^�b�N�ɐς܂��B���[�h�u�{�v�ň�ԏォ�牉�Z����āA���l�T�Ɛ��l�S����������ɉ��Z���ʂ̐��l�X���X�^�b�N�ɐς܂�܂��B���[�h�u�[�v�ň�ԏォ�牉�Z����āA���l�X�Ɛ��l�R����������ɉ��Z���ʂ̐��l�U���X�^�b�N�ɐς܂�܂��B���ꂪ�ʏ�̃|�[�����h�L�@�ł̂T�{�S�|�R�̌��ʂł��B
+  3 4 5 + -  であれば、処理は左から右に実行されます。数値がスタックに積まれる。ワード「＋」で一番上から演算されて、数値５と数値４が消えた後に演算結果の数値９がスタックに積まれます。ワード「ー」で一番上から演算されて、数値９と数値３が消えた後に演算結果の数値６がスタックに積まれます。これが通常のポーランド記法での５＋４－３の結果です。
 
                        (5)      
              (4)        4                (9)
    (3)  -->   3   -->   3   -->  +  -->   3   -->  -  -->  (6)
   -----     -----     -----             -----             -----
 
-���ʂ����邽�߂ɏ����̓X�^�b�N�Ƀf�[�^��ςݏグ�Ă̓X�^�b�N�̈�ԏ�̓��e�Ǝ��̓��e�����Z�����A���̌��ʂ��܂��X�^�b�N�̈�ԏ�ɐςݏグ�܂��B
+結果がするために処理はスタックにデータを積み上げてはスタックの一番上の内容と次の内容を演算処理、その結果をまたスタックの一番上に積み上げます。
 
 
-�E����͎Z�p���Z�̈ꕔ�̃��[�h�̘b�ł���A���[�h�ɂ���Ď��s���ɏ�����X�^�b�N���Ƃ��̂��Ƃɐςݏグ����X�^�b�N�̐��͂��܂��܂ł���B
-�@FIG-FORTH�ł͗����������邽�߂Ɏ��̂悤�ȕ\���̎d�������Ă���B"("��")"�̊Ԃɏ����ꂽ������̓R�����g�Ƃ��Ĉ����āA���s����܂���B
+・これは算術演算の一部のワードの話であり、ワードによって実行時に消費されるスタック数とそのあとに積み上げられるスタックの数はさまざまである。
+　FIG-FORTHでは理解を助けるために次のような表示の仕方をしている。"("と")"の間に書かれた文字列はコメントとして扱われて、実行されません。
 
    ( n11 n12 n13 --- n21 n22 ) 
 
 
       (n13)              
        n12                      
-       n11                 -->   ���l�̓X�^�b�N���� n13 --> n12 --> n11 �̏��Ɏ��o�����B
+       n11                 -->   数値はスタックから n13 --> n12 --> n11 の順に取り出される。
       -----                       
-     ���s�O�̃X�^�b�N�̏�ԁ@�@
+     実行前のスタックの状態　　
 
                 
       (n22) 
-       n21                 -->   ���l�� n21 --> n22 �̏��ɃX�^�b�N��ɐςݏグ����B
+       n21                 -->   数値は n21 --> n22 の順にスタック上に積み上げられる。
       -----   
-     ���s��̃X�^�b�N�̏��
+     実行後のスタックの状態
 
 
 
 
-��ToUnderstandFORTH�𓮂����Ă݂�B
+◎ToUnderstandFORTHを動かしてみる。
 
-�E�g����PC��Windows�ł��B�u���܂ł̊J���󋵂ƌ��݂̉ۑ�v���Q�l�ɁAVisual Studio 2022�𗧂��グ�āA�u�f�o�b�O�ɊJ�n�iS)�v���N���b�N����B�������Ԃ��o���Ă���R�}���h�v�����v�g���\������AFORTH�̏������b�Z�[�W�̕\����ɃL�[���͑҂��ƂȂ�B�B
-�[���͑҂��ƂȂ�B
-�E������FORTH�̃��[�h����ׂăL�[���͂��s���A�Ō��ENTER�L�[�������B
-�E�L�[���͂���FORTH�̃��[�h�񂪎��s����A��ʂɕ�����\��������ƃ��[�h�񂪎��s�����B
-�E���ׂẴL�[���͂���FORTH�̃��[�h��̎��s���I������ƁA��ʂɁuOK�v���\�������B���������s�̓r���łŃG���[����������ƁA���炩�̃��b�Z�[�W��\�����āA�ʏ�͉�ʂɁuOK�v���\�������B
-
-
-
-�Ⴆ�΁A�u�{�v��u�[�v�A�u���v���g���Đ��l�v�Z������ƈȉ��̂悤�ɂȂ�܂��B
-�m�D�n�͌v�Z�������ʂ���ʂɕ\�����܂��B
-�����ł̌v�Z�ɂ͒ʏ�̃|�[�����h�L�@�łȂ��āA�t�|�[�����h�L�@�ōs���܂��B
-
-  4 5 + . [ENTER]              --> 9 OK    �S�ƂT�𑫂�
-  3 4 5 + - . [ENTER]          --> 6 OK    �S�ƂT�𑫂��B���̌��ʂ���R�������B
-  2 3 4 5 + - * . [ENTER]      --> 12 OK   �S�ƂT�𑫂��B���̌��ʂ���R�������B����ɂ��̌��ʂɂQ���|����B
+・使えるPCはWindowsです。「今までの開発状況と現在の課題」を参考に、Visual Studio 2022を立ち上げて、「デバッグに開始（S)」をクリックする。少し時間が経ってからコマンドプロンプトが表示され、FORTHの初期メッセージの表示後にキー入力待ちとなる。。
+ー入力待ちとなる。
+・そこにFORTHのワードを並べてキー入力を行い、最後にENTERキーを押す。
+・キー入力したFORTHのワード列が実行され、画面に文字を表示したりとワード列が実行される。
+・すべてのキー入力したFORTHのワード列の実行が終了すると、画面に「OK」が表示される。もしも実行の途中ででエラーが発生すると、何らかのメッセージを表示して、通常は画面に「OK」が表示される。
 
 
 
+例えば、「＋」や「ー」、「＊」を使って数値計算をすると以下のようになります。
+［．］は計算した結果を画面に表示します。
+ここでの計算には通常のポーランド記法でなくて、逆ポーランド記法で行われます。
+
+  4 5 + . [ENTER]              --> 9 OK    ４と５を足す
+  3 4 5 + - . [ENTER]          --> 6 OK    ４と５を足す。その結果から３を引く。
+  2 3 4 5 + - * . [ENTER]      --> 12 OK   ４と５を足す。その結果から３を引く。さらにその結果に２を掛ける。
 
 
-�����݁AToUnderstandFORTH�Ő���Ɏ��s���邱�Ƃ��m�F����Ă��郏�[�h
 
-�@���̂Ƃ���A����Ɏ��s�ł��郏�[�h�͈ȉ��̂Ƃ���ł���B
-�@�@�P�j���l�A�u�{�v��u�[�v�A�u���v�A�u�D�v�i�h�b�g�j���g�����ꍇ�͐���Ȍ��ʂ��\������Ă���B  
-        ��j  ���͓��e�F1 2 + . [enter]  
-              �o�͓��e�F 3  OK  
 
-�@�@�Q�j�����񂪉�ʂɕ\�������B
-              ���͓��e�F." Hello! "  [enter] 
-              �o�͓��e�FHello!  OK 
 
-�@�@�R�j���[�h TRACE_ON�ATRACE_OFF�͐V�K�ɍ쐬�������[�h�ŁA�����s����Ă��郏�[�h����g�p���Ă��郌�W�X�^���̏�����ʂɁu�\������^�\�����Ȃ��v�̐؂�ւ����s���܂��B
-�@�@�@�@��j ���͓��e�FTRACE_ON 1 . TRACE_OFF [enter] 
-�@�@�@�@�@�@�@�o�͓��e�F�@�i��ʂɕ\�������ʂ���������̂ŏȗ����邪�A1 . ���e���[�h�iWORD��PFIND���j�ŉ�͂��A���s���Ă����󋵂��\�������j
+◎現在、ToUnderstandFORTHで正常に実行することが確認されているワード
 
-����L�ȊO�͂������ȓ�������邩�A�Z�����Ă܂��`�F�b�N���ł��Ă��Ȃ����̂ǂ��炩�̏�Ԃł��B�܂��J���r��ɂ���܂��B���͂���������̈�ł��B
+　今のところ、正常に実行できるワードは以下のとおりである。
+　　１）数値、「＋」や「ー」、「＊」、「．」（ドット）を使った場合は正常な結果が表示されている。  
+        例）  入力内容：1 2 + . [enter]  
+              出力内容： 3  OK  
 
-�@�@�P�j�����ɐV�������[�h��o�^����i�u�F�v�Ɓu�G�v�ň͂܂ꂽFORTH�������s����j�ۂɁA�����̓r����ToUnderstandFORTH���m�ۂ��Ă���͈͂̃A�h���X�ȊO���A�N�Z�X���邽�߂ɃG���[����������B�����̓��Z�b�g����ď�����Ԃɖ߂�B
+　　２）文字列が画面に表示される。
+              入力内容：." Hello! "  [enter] 
+              出力内容：Hello!  OK 
 
-            ���͓��e�F    : TEST_NAME 1 2 + . ;   [enter] 
-�@�@�@�@�@�@ �o�͓��e�F�@WORD_POINTER_ADDRESS(R8):  : =2032203120454d2f
+　　３）ワード TRACE_ON、TRACE_OFFは新規に作成したワードで、今実行されているワード名や使用しているレジスタ等の情報を画面に「表示する／表示しない」の切り替えを行います。
+　　　　例） 入力内容：TRACE_ON 1 . TRACE_OFF [enter] 
+　　　　　　　出力内容：　（画面に表示される量が多すぎるので省略するが、1 . を各ワード（WORDやPFIND等）で解析し、実行していく状況が表示される）
+
+◎上記以外はおかしな動作をするか、忙しくてまだチェックができていないかのどちらかの状態です。まだ開発途上にあります。次はそうした例の一つです。
+
+　　１）辞書に新しいワードを登録する（「：」と「；」で囲まれたFORTH文を実行する）際に、処理の途中でToUnderstandFORTHが確保している範囲のアドレス以外をアクセスするためにエラーが発生する。処理はリセットされて初期状態に戻る。
+
+            入力内容：    : TEST_NAME 1 2 + . ;   [enter] 
+　　　　　　 出力内容：　WORD_POINTER_ADDRESS(R8):  : =2032203120454d2f
                        WRITE_REGISTER_NUMBER(R9):  : =103
                        7ff7b6ac2bb0 = 7ff7b6ac8e27
                        7ff7b6adc000 = 7ff7b6af5fdf
