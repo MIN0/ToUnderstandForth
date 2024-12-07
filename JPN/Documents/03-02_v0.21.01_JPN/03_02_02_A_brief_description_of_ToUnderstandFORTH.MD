@@ -9,15 +9,15 @@ FORTHに関しての文献で、私が知っているものは１９９０年ご
 [（英語画面）](https://ndlsearch.ndl.go.jp/en/search?cs=bib&collapse=null&display=panel&from=0&size=20&keyword=forth+inoue&f-ht=ndl)  
   
   
-## ・[Starting FORTH　（WEB版なので各国語で読むことができます）](https://www.forth.com/starting-forth/0-starting-forth/)  
+### ・[Starting FORTH　（WEB版なので各国語で読むことができます）](https://www.forth.com/starting-forth/0-starting-forth/)  
   
   
-## ・[A Beginner's Guide to Forth　　（英語のみ）](https://galileo.phys.virginia.edu/classes/551.jvn.fall01/primer.htm)  
+### ・[A Beginner's Guide to Forth　　（英語のみ）](https://galileo.phys.virginia.edu/classes/551.jvn.fall01/primer.htm)  
   
   
 あと、MSX用に開発されたFORTHのWEBもあります（事情があって、今は私のGitHub上に移動しています）  
   
-## ・[H-FORTH_MSX](https://github.com/MIN0/H-FORTH_MSX)  
+### ・[H-FORTH_MSX](https://github.com/MIN0/H-FORTH_MSX)  
   
   
   
