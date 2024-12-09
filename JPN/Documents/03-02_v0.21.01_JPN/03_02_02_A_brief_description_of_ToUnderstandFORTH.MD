@@ -4,9 +4,9 @@ FORTHに関しての文献で、私が知っているものは１９９０年ご
   
 ### ・標準FORTH　<br>（日本語のみ。日本の図書館のインターネットライブラリから見ることができます。使用には登録が必要です。）　
   
-[     （ここをクリックすると図書館の日本語画面を表示します）](https://ndlsearch.ndl.go.jp/search?cs=bib&collapse=null&display=panel&from=0&size=20&keyword=%E6%A8%99%E6%BA%96FORTH&f-ht=ndl&f-ht=library)  
+- [     （ここをクリックすると図書館の日本語画面を表示します）](https://ndlsearch.ndl.go.jp/search?cs=bib&collapse=null&display=panel&from=0&size=20&keyword=%E6%A8%99%E6%BA%96FORTH&f-ht=ndl&f-ht=library)  
   
-[     （Click here to view the library's English screen）](https://ndlsearch.ndl.go.jp/en/search?cs=bib&collapse=null&display=panel&from=0&size=20&keyword=forth+inoue&f-ht=ndl)  
+- [     （Click here to view the library's English screen）](https://ndlsearch.ndl.go.jp/en/search?cs=bib&collapse=null&display=panel&from=0&size=20&keyword=forth+inoue&f-ht=ndl)  
   
   
 ### ・[Starting FORTH　（WEB版なので各国語で読むことができます）](https://www.forth.com/starting-forth/0-starting-forth/)  
