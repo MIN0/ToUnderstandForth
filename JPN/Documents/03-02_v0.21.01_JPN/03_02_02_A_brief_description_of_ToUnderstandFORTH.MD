@@ -14,7 +14,7 @@ FORTHに関しての文献で、私が知っているものは１９９０年ご
 ### ・[A Beginner's Guide to Forth　　（英語のみ）](https://galileo.phys.virginia.edu/classes/551.jvn.fall01/primer.htm)  
 <br>  
   
-    あと、MSX用に開発されたFORTHのWEBもあります（事情があって、今は私のGitHub上に移動しています）  
+あと、MSX用に開発されたFORTHのWEBもあります（事情があって、今は私のGitHub上に移動しています）  
   
 ### ・[H-FORTH_MSX  （日本語と英語）](https://github.com/MIN0/H-FORTH_MSX)  
 <br>  
