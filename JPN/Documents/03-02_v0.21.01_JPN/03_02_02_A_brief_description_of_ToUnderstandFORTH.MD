@@ -4,9 +4,9 @@ FORTHに関しての文献で、私が知っているものは１９９０年ご
   
 ### ・標準FORTH　<br>（日本語のみ。日本の図書館のインターネットライブラリから見ることができます。使用には登録が必要です。）　
   
-[（ここをクリックすると図書館の日本語画面を表示します）](https://ndlsearch.ndl.go.jp/search?cs=bib&collapse=null&display=panel&from=0&size=20&keyword=%E6%A8%99%E6%BA%96FORTH&f-ht=ndl&f-ht=library)  
+    [（ここをクリックすると図書館の日本語画面を表示します）](https://ndlsearch.ndl.go.jp/search?cs=bib&collapse=null&display=panel&from=0&size=20&keyword=%E6%A8%99%E6%BA%96FORTH&f-ht=ndl&f-ht=library)  
   
-[（Click here to view the library's English screen）](https://ndlsearch.ndl.go.jp/en/search?cs=bib&collapse=null&display=panel&from=0&size=20&keyword=forth+inoue&f-ht=ndl)  
+    [（Click here to view the library's English screen）](https://ndlsearch.ndl.go.jp/en/search?cs=bib&collapse=null&display=panel&from=0&size=20&keyword=forth+inoue&f-ht=ndl)  
   
   
 ### ・[Starting FORTH　（WEB版なので各国語で読むことができます）](https://www.forth.com/starting-forth/0-starting-forth/)  
@@ -14,9 +14,9 @@ FORTHに関しての文献で、私が知っているものは１９９０年ご
 ### ・[A Beginner's Guide to Forth　　（英語のみ）](https://galileo.phys.virginia.edu/classes/551.jvn.fall01/primer.htm)  
 <br>  
   
-あと、MSX用に開発されたFORTHのWEBもあります（事情があって、今は私のGitHub上に移動しています）  
+    あと、MSX用に開発されたFORTHのWEBもあります（事情があって、今は私のGitHub上に移動しています）  
   
-### ・[H-FORTH_MSX](https://github.com/MIN0/H-FORTH_MSX)  
+### ・[H-FORTH_MSX  （日本語と英語）](https://github.com/MIN0/H-FORTH_MSX)  
 <br>  
   
   
@@ -120,12 +120,12 @@ c)
   
 # ◎ToUnderstandFORTHを動かしてみる。  
   
-## ・使えるPCはWindowsです。「今までの開発状況と現在の課題」を参考に、Visual Studio 2022を立ち上げて、「デバッグに開始（S)」をクリックする。少し時間が経ってからコマンドプロンプトが表示され、FORTHの初期メッセージの表示後にキー入力待ちとなる。。  
-ー入力待ちとなる。  
+## 動かしてみましょう  
+・使えるPCはWindowsです。「今までの開発状況と現在の課題」を参考に、Visual Studio 2022を立ち上げて、「デバッグの開始（S)」をクリックする。少し時間が経ってからコマンドプロンプトが表示され、FORTHの初期メッセージの表示後にキー入力待ちとなる。  
 ・そこにFORTHのワードを並べてキー入力を行い、最後にENTERキーを押す。  
 ・キー入力したFORTHのワード列が実行され、画面に文字を表示したりとワード列が実行される。  
 ・すべてのキー入力したFORTHのワード列の実行が終了すると、画面に「OK」が表示される。もしも実行の途中ででエラーが発生すると、何らかのメッセージを表示して、通常は画面に「OK」が表示される。  
-  
+<br>  
   
   
 例えば、「＋」や「ー」、「＊」を使って数値計算をすると以下のようになります。  
@@ -133,14 +133,15 @@ c)
 ここでの計算には通常のポーランド記法でなくて、逆ポーランド記法で行われます。  
 ```    
   4 5 + . [ENTER]              --> 9 OK    ４と５を足す  
-  3 4 5 + - . [ENTER]          --> 6 OK    ４と５を足す。その結果から３を引く。  
-  2 3 4 5 + - * . [ENTER]      --> 12 OK   ４と５を足す。その結果から３を引く。さらにその結果に２を掛ける。  
+  3 4 5 + - . [ENTER]          --> -6 OK    ４と５を足す。そして、３からその結果を引く。  
+  2 3 4 5 + - * . [ENTER]      --> -12 OK   ４と５を足す。３からその結果を引く。さらに２に
+その結果を掛ける。  
 ```    
-  
+<br>  
   
 # ◎現在、ToUnderstandFORTHで正常に実行することが確認されているワード  
   
-　今のところ、正常に実行できるワードは以下のとおりである。  
+　今のところ、正常に実行できるワードは以下のとおりです。  
 　　１）数値、「＋」や「ー」、「＊」、「．」（ドット）を使った場合は正常な結果が表示されている。   
 ```  
         例）  入力内容：1 2 + . [enter]    
@@ -161,7 +162,7 @@ c)
   
 # ◎上記以外はおかしな動作をするか、忙しくてまだチェックができていないかのどちらかの状態です。まだ開発途上にあります。次はそうした例の一つです。  
   
-　　１）辞書に新しいワードを登録する（「：」と「；」で囲まれたFORTH文を実行する）際に、処理の途中でToUnderstandFORTHが確保している範囲のアドレス以外をアクセスするためにエラーが発生する。処理はリセットされて初期状態に戻る。  
+　　１）辞書に新しいワードを登録する（「：」と「；」で囲まれたFORTH文を実行する）際に、処理の途中で何故かToUnderstandFORTHが確保している範囲のアドレス以外をアクセスするために例外エラーを表示しています。処理はリセットされて初期状態に戻ります。  
 ```  
             入力内容：    : TEST_NAME 1 2 + . ;   [enter]   
 　　　　　　 出力内容：　WORD_POINTER_ADDRESS(R8):  : =2032203120454d2f  
