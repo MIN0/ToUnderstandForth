@@ -78,5 +78,6 @@ Visual Studio 2022でMASM(Microsoft Macro Assembler)を動かせるようにす�
   
   
 これで「 ToUnderstandFORTH  (Fig-Forth X64) Rev 0.21.01 」が画面に表示されれば成功です。  
-
-
+  
+  
+[次のページへ ](03_02_02_A_brief_description_of_ToUnderstandFORTH.DM)  
