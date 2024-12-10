@@ -102,6 +102,8 @@ c)
   
     `: 2SUB1 ( n1 n2 --- n3 ) - ;`  
 <br>
+
+ここでの値n1,n2,n3の関係は `n3 = n1 - n2` です。  
   
 # ◎ToUnderstandFORTHを動かしてみる。  
   
