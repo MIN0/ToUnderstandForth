@@ -11,4 +11,4 @@ ToUnderstandForthのソースコードはcpp形式とasm形式に分かれ、開
 私が作成しているソースコードは、FORTHシステムとしては基本的な機能だけでできています。数値演算やメッセージの表示程度ができます。実行状況を調べるためのトレース機能を備えています。
 私は動作を理解するための基本的なFORTHシステムを開発し、次の開発でより柔軟なFORTHシステムの開発を目指します。  
 
-[このディレクトリへ ](./JPN/Documents/03-02_v0.21.01_JPN/03_02_01_Development status to date and current issues.MD)      
+[このディレクトリへ ](./JPN/Documents/03-02_v0.21.01_JPN/03_02_01_Development_status_to_date_and_current_issues.MD)      
