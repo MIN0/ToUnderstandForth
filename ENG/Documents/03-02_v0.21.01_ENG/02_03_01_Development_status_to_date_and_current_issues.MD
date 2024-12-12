@@ -11,13 +11,13 @@
     
 [Documents/01_01_Inoue-Forth_SorceCode](https://github.com/MIN0/ToUnderstandForth/tree/main/ENG/Documents/01_01_Inoue-Forth_SorceCode)  
   
-## - Next, we found a PDF document of FIG-FORTH (8086 version) (source code for Intel 8086 CPU version, written entirely in MASM), which was the original of INOUE-FORTH, and changed to development in FIG-FORTH (8086 version) after that.  
+## Next, we found a PDF document of FIG-FORTH (8086 version) (source code for Intel 8086 CPU version, written entirely in MASM), which was the original of INOUE-FORTH, and changed to development in FIG-FORTH (8086 version) after that.  
   
 -First, it was written only in MASM, and for the first time, error messages that had occurred when compiling the source code were no longer displayed.  
 -Second, the initial display screen appeared on the screen normally, and the execution result appeared on the screen after key input and ENTER key input.  
 -I confirmed that the title message could now be displayed and changed the name of the program to “ToUnderstandFORTH” in subsequent modifications. Below is the current display screen.  
   
-````  
+```  
        ToUnderstandFORTH (Fig-Forth X64) Rev 0.21.01  
        <  
 ```  
