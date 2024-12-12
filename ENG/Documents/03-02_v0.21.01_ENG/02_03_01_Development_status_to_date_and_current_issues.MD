@@ -32,7 +32,7 @@
  I am currently developing in Windows 11 environment with Visual Studio 2022 + MASM (64 bit) in Debug mode.  
  Because of Visual Studio 2022's Debug mode, Project9_FORTH_FULL_FIXED.exe created from 1st_Driver9_FIXED.cpp and MainEngine9_FIXED.asm in /Source only worked on my computer. I could only run it on my PC. It does not work with Visual Studio 2022 on other PCs. If you are reading this article and want to check the operation, you need to prepare Visual Studio 2022 environment on your PC, build and debug it by following the steps below.  
   
-## <Reference Example>.  
+## Reference Example.  
 To make MASM (Microsoft Macro Assembler) work with Visual Studio 2022, you need to start a new project in Visual Studio 2022 and configure the following settings. In this example, the project name is Project9_FullTest_FIXED.  
   
  (1) Right-click on Project9_FullTest_FIXED, which is marked with a triangle to the left of the “Solution Explorer” on the right side of the screen.  
