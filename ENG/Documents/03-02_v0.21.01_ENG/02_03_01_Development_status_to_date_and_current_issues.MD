@@ -28,7 +28,7 @@
   
   
   
-## - There are some points to note. 
+## There are some points to note. 
  I am currently developing in Windows 11 environment with Visual Studio 2022 + MASM (64 bit) in Debug mode.  
  Because of Visual Studio 2022's Debug mode, Project9_FORTH_FULL_FIXED.exe created from 1st_Driver9_FIXED.cpp and MainEngine9_FIXED.asm in /Source only worked on my computer. I could only run it on my PC. It does not work with Visual Studio 2022 on other PCs. If you are reading this article and want to check the operation, you need to prepare Visual Studio 2022 environment on your PC, build and debug it by following the steps below.  
   
