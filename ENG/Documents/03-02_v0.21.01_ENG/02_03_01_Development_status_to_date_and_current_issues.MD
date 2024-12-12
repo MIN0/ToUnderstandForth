@@ -9,7 +9,7 @@
   
 -For more information about the document “Standard FORTH”, please refer to the following (however, this document is written only in Japanese)  
     
-[Documents/01_01_Inoue-Forth_SorceCode](https://github.com/MIN0/ToUnderstandForth/tree/main/JPN/Documents/01_01_Inoue-Forth_ SorceCode)
+[Documents/01_01_Inoue-Forth_SorceCode](https://github.com/MIN0/ToUnderstandForth/tree/main/ENG/Documents/01_01_Inoue-Forth_ SorceCode)  
   
 ## - Next, we found a PDF document of FIG-FORTH (8086 version) (source code for Intel 8086 CPU version, written entirely in MASM), which was the original of INOUE-FORTH, and changed to development in FIG-FORTH (8086 version) after that.  
   
