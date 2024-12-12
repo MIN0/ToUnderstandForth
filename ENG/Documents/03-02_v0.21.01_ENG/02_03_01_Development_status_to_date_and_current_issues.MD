@@ -47,7 +47,7 @@ To make MASM (Microsoft Macro Assembler) work with Visual Studio 2022, you need 
   
  3) Right-click on “Source Files” in the Solution Explorer.  
  4) In the window that appears, select “Add” -> “Existing Items” -> Directory and add the following files.  
-````  
+```  
        1st_Driver9_FIXED.cpp → source code written in C++  
        MainEngine9_FIXED.asm → source code written in assembler (Intel x64)  
 ```  
@@ -57,10 +57,10 @@ To make MASM (Microsoft Macro Assembler) work with Visual Studio 2022, you need 
 
  5) Move the cursor to MainEngine9_FIXED.asm listed in “Source Files” in the Solution Explorer and right-click 
  6) Click on “Properties” and under “Configuration Properties” and “General  
-````  
+```  
  Under “Exclude from Build,” ``No  
  Under ````Type of item''' select ```Microsoft Macro Assembler''' and click ```OK.  
-````  
+```  
   
 ![Setup_screen_1-3](https://github.com/MIN0/ToUnderstandForth/blob/main/JPN/Documents/03-02_v0.21.01_JPN/pict/Setup_screen_1-3.png)  
   
