@@ -24,7 +24,7 @@
   
 　文献「FIG-FORTH（8086版）」については、詳しくは以下を参照ください（ただし、英語のみで書かれた文献です）  
   
-　　[Documents/01_02_Fig-Forth_SorceCode](https://github.com/MIN0/ToUnderstandForth/tree/main/JPN/Documents/01_02_Fig-Forth_SorceCode) 
+　　[Documents/01_02_Fig-Forth_SorceCode](https://github.com/MIN0/ToUnderstandForth/tree/main/JPN/Documents/01_02_Fig-Forth_SorceCode/fig-forth_8086-8088_ver_10.pdf)  
   
   
   
