@@ -24,7 +24,7 @@
   
 -For more information about the document “FIG-FORTH (8086 version)”, please refer to the following (however, the document is written only in English)  
   
-[Documents/01_02_Fig-Forth_SorceCode](https://github.com/MIN0/ToUnderstandForth/tree/main/JPN/Documents/01_02_Fig-Forth_SorceCode) 
+[Documents/01_02_Fig-Forth_SorceCode](https://github.com/MIN0/ToUnderstandForth/tree/main/JPN/Documents/01_02_Fig-Forth_SorceCode/fig-forth_8086-8088_ver_10.pdf)  
   
   
   
