@@ -1,171 +1,86 @@
-# ToUnderstandFORTHの簡単な解説  
-  
-FORTHに関しての文献で、私が知っているものは１９９０年ごろに書かれた文献が多いのですが、いくつか今でも読むことができます。ここでは簡単な説明にとどめますので、詳しくはそちらを参照願います。  
-  
-### -標準FORTH  
-（日本語のみ。日本の図書館のインターネットライブラリから見ることができます。使用には登録が必要です。）　
-  
-[ここをクリックすると図書館の日本語画面を表示します](https://ndlsearch.ndl.go.jp/search?cs=bib&collapse=null&display=panel&from=0&size=20&keyword=%E6%A8%99%E6%BA%96FORTH&f-ht=ndl&f-ht=library)  
-  
-[Click here to view the library's English screen](https://ndlsearch.ndl.go.jp/en/search?cs=bib&collapse=null&display=panel&from=0&size=20&keyword=forth+inoue&f-ht=ndl)  
-  
-  
-### -[Starting FORTH　](https://www.forth.com/starting-forth/0-starting-forth/)  
-（WEB版なので各国語で読むことができます）  
-  
-### -[A Beginner's Guide to Forth　　](https://galileo.phys.virginia.edu/classes/551.jvn.fall01/primer.htm)  
-（英語のみ）  
-<br>  
-  
-あと、MSX用に開発されたFORTHのWEBもあります（事情があって、今は私のGitHub上に移動しています）  
-  
-### -[H-FORTH_MSX  ](https://github.com/MIN0/H-FORTH_MSX)  
-（日本語と英語）  
-<br>  
-  
-  
-# 簡単な逆ポーランド記法とワードの説明  
-## -通常の算術演算はポーランド記法で、以下のように行われます。
-```  
-  5+4-3 = 6  
-```  
-ですが、FORTH言語ではそううまくは行きません。  
-  
-## -FORTH言語はスタックを使って、逆ポーランド記法で行われます。  
-  
- FORTHのスタック操作による数値演算は以下になります。  
- １）数値ｎ１と数値ｎ２がスタックに積まれる。  
- ２）ワード「＋」が数値ｎ１と数値ｎ２を取り出して演算する。数値ｎ１と数値ｎ２はスタックから消えた状態になります。  
- ３）ワード「＋」の演算で求められた数値ｎ３がスタックに積まれる。  
-  
-  
-その時のスタックの状態を図で示します。一つ数値がスタックに積み上げられると、図では最上位の数値の上にその数値が上に載って、その数値が最上位となります。  
-  
-> [!IMPORTANT]  
-> 注意１）数値に（）がかぶさっている場合はそれがスタックの最上位であることを示す。  
-> 注意２）-----はスタックの底辺で、スタックをすべて吐き出すと空になることを表す。  
-> 注意３）ここでの数値以外の「＋」や「ー」、「＊」はワードと呼ばれる。ワードはスタック上のデータの処理や様々な処理を定義し、実行することができる。  
-  
-  
-a)  
-  `4 3 -`  であれば、４から３を引いて結果は１。  
-  
-```  
-             (3)  
-   (4)  -->   4   -->  -  -->  (1)  
-  -----     -----             -----  
-```  
-  
-b)  
-  `5 1 +`  であれば、５と１を足して結果は６。  
-```   
-             (1)  
-   (5)  -->   5   -->  +  -->  (6)  
-  -----     -----             -----  
-```  
-  
-c)  
-  `5 4 3 - +`  であれば、処理は左から右に実行されます。数値が3個スタックに積まれます。ワード「ー」で2番目のスタックから一番上のスタックが演算されて（４から３を引かれる)、数値４と数値３が消えた後に演算結果の数値１がスタックに積まれます。ワード「＋」で2番目のスタックから一番上のスタックが演算されて（５と１が足される）、数値５と数値１が消えた後に演算結果の数値６がスタックに積まれます。これは通常のポーランド記法での５＋４－３の結果と同じです。
-  
-```    
-                       (5)  
-             (4)        4                (9)  
-   (3)  -->   3   -->   3   -->  +  -->   3   -->  -  -->  (6)  
-  -----     -----     -----             -----             -----  
-```  
-  
-と、説明しましたが、演算の順序が逆に並んでいるなど、理解しにくい説明になっています。もっといい説明ができないものか、私も思案中です。    
-<br>  
-  
-## -これは算術演算の一部のワードの話であり、ワードによって実行時に消費されるスタック数とそのあとに積み上げられるスタックの数はさまざまである。  
-FIG-FORTHでは理解を助けるために次のような表示の仕方をしている。"("と")"の間に書かれた文字列はコメントとして扱われて、実行されません。"---"の左側は実行前のスタックの状態、右側は実行後のスタックの状態を表します。  
-  
-   `( n11 n12 n13 --- n21 n22 )`   のスタックの状態は以下の通りです。
-  
-```    
-      (n13)  
-       n12                        
-       n11  
-      -----                         
-実行時に数値はスタックから n13 --> n12 --> n11 の順に取り出される。       　　
-```  
-  
-```  
-      (n22)   
-       n21  
-      -----     
-実行後に数値は n21 --> n22 の順にスタック上に積み上げられている。  
-```  
-<br>  
-  
-新しくワードを定義するときは、ワード":"とワード";"を使って定義します。例えば、スタック上の二つの数値を引き算して、その値をスタック上に残すワード2SUB1を定義したときは以下のように書けます。  
-  
-    `: 2SUB1 ( n1 n2 --- n3 ) - ;`  
-<br>
+# ◎Development to date and current issues  
 
-ここでの値n1,n2,n3の関係は `n3 = n1 - n2` です。  
+## First started with understanding INOUE-FORTH  
+-INOUE-FORTH is based on the book “Standard FORTH” published in Japan in the 1980s. For development, I started by manually transcribing this source code from this book.  
+-The basic part of INOUE-FORTH was written in MASM (Microsoft Macro Assembler) assembler and the rest in FORTH source code. Therefore, it was very difficult for beginners who were not yet familiar with FORTH to rewrite from these source codes to an executable FORTH processor.    
+-I have a lot of respect for those who, back in the 1980s, created their own FORTH processor based on this book alone.  
+-In the end, I tried to reproduce INOUE-FORTH, but I could not rewrite the source code written in FORTH into the MASM assembler. The assembler source code that I had created by imitation inevitably produced many errors, and in the end I gave up on continuing the development.  
+-However, I learned a lot from the book “Standard FORTH” written by Mr. Inoue. This book gave me valuable information about the FORTH language. Starting with “The ABC's of FORTH,” the book also covers “Internal Structure of the FORTH System,” “FORTH Words,” “How to Create a FORTH Program,” “Extensions to the FORTH Language,” “Implementation of the FORTH System,” and “FORTH83 (Differences between FORTH79 and FORTH83). ),” etc. Without this book, I would not have been able to understand the next FIG-FORTH (8086 edition). It was an important textbook for me. I am grateful for that.  
   
+-For more information about the document “Standard FORTH”, please refer to the following (however, this document is written only in Japanese)  
+    
+[Documents/01_01_Inoue-Forth_SorceCode](https://github.com/MIN0/ToUnderstandForth/tree/main/JPN/Documents/01_01_Inoue-Forth_ SorceCode)
   
-# ToUnderstandFORTHを動かしてみる。  
+## - Next, we found a PDF document of FIG-FORTH (8086 version) (source code for Intel 8086 CPU version, written entirely in MASM), which was the original of INOUE-FORTH, and changed to development in FIG-FORTH (8086 version) after that.  
   
-## 動かしてみましょう  
--使えるPCはWindowsです。「今までの開発状況と現在の課題」を参考に、Visual Studio 2022を立ち上げて、「デバッグの開始（S)」をクリックする。少し時間が経ってからコマンドプロンプトが表示され、FORTHの初期メッセージの表示後にキー入力待ちとなる。  
--そこにFORTHのワードを並べてキー入力を行い、最後にENTERキーを押す。  
--キー入力したFORTHのワード列が実行され、画面に文字を表示したりとワード列が実行される。  
--すべてのキー入力したFORTHのワード列の実行が終了すると、画面に「OK」が表示される。もしも実行の途中ででエラーが発生すると、何らかのメッセージを表示して、通常は画面に「OK」が表示される。  
-<br>  
+-First, it was written only in MASM, and for the first time, error messages that had occurred when compiling the source code were no longer displayed.  
+-Second, the initial display screen appeared on the screen normally, and the execution result appeared on the screen after key input and ENTER key input.  
+-I confirmed that the title message could now be displayed and changed the name of the program to “ToUnderstandFORTH” in subsequent modifications. Below is the current display screen.  
   
-  
-例えば、「＋」や「ー」、「＊」を使って数値計算をすると以下のようになります。  
-［．］は計算した結果を画面に表示します。  
-ここでの計算には通常のポーランド記法でなくて、逆ポーランド記法で行われます。  
-```    
-  4 5 + . [ENTER]              --> 9 OK    ４と５を足す  
-  3 4 5 + - . [ENTER]          --> -6 OK    ４と５を足す。そして、３からその結果を引く。  
-  2 3 4 5 + - * . [ENTER]      --> -12 OK   ４と５を足す。３からその結果を引く。さらに２にその結果を掛ける。  
-```    
-<br>  
-  
-# 現在、ToUnderstandFORTHで正常に実行することが確認されているワード  
-  
-今のところ、正常に実行できるワードは以下のとおりです。  
-  
- １）数値、「＋」や「ー」、「＊」、「．」（ドット）を使った場合は正常な結果が表示されている。   
-```  
-        例）  入力内容：1 2 + . [enter]    
-              出力内容： 3  OK  
+````  
+       ToUnderstandFORTH (Fig-Forth X64) Rev 0.21.01  
+       <  
 ```  
   
- ２）文字列が画面に表示される。  
-```  
-              入力内容：." Hello! "  [enter]   
-              出力内容：Hello!  OK   
+-For more information about the document “FIG-FORTH (8086 version)”, please refer to the following (however, the document is written only in English)  
+  
+[Documents/01_02_Fig-Forth_SorceCode](https://github.com/MIN0/ToUnderstandForth/tree/main/JPN/Documents/01_02_Fig-Forth_SorceCode) 
+  
+  
+  
+## - There are some points to note. 
+ I am currently developing in Windows 11 environment with Visual Studio 2022 + MASM (64 bit) in Debug mode.  
+ Because of Visual Studio 2022's Debug mode, Project9_FORTH_FULL_FIXED.exe created from 1st_Driver9_FIXED.cpp and MainEngine9_FIXED.asm in /Source only worked on my computer. I could only run it on my PC. It does not work with Visual Studio 2022 on other PCs. If you are reading this article and want to check the operation, you need to prepare Visual Studio 2022 environment on your PC, build and debug it by following the steps below.  
+  
+## <Reference Example>.  
+To make MASM (Microsoft Macro Assembler) work with Visual Studio 2022, you need to start a new project in Visual Studio 2022 and configure the following settings. In this example, the project name is Project9_FullTest_FIXED.  
+  
+ (1) Right-click on Project9_FullTest_FIXED, which is marked with a triangle to the left of the “Solution Explorer” on the right side of the screen.  
+ (2) In the menu, go to “Build Dependencies (B)” -> “Customize Build” and click the box marked “MASM”, then click “OK”.  
+  
+  
+![Setup_screen_1-1](https://github.com/MIN0/ToUnderstandForth/blob/main/JPN/Documents/03-02_v0.21.01_JPN/pict/Setup_screen_1-1.png)
+
+
+
+
+  
+ 3) Right-click on “Source Files” in the Solution Explorer.  
+ 4) In the window that appears, select “Add” -> “Existing Items” -> Directory and add the following files.  
+````  
+       1st_Driver9_FIXED.cpp → source code written in C++  
+       MainEngine9_FIXED.asm → source code written in assembler (Intel x64)  
 ```  
   
- ３）ワード `TRACE_ON`、`TRACE_OFF`は新規に作成したワードで、今実行されているワード名や使用しているレジスタ等の情報を画面に「表示する／表示しない」の切り替えを行います。  
-```  
- 例） 入力内容：TRACE_ON 1 . TRACE_OFF [enter]   
-　　　出力内容：注意４）を参照  
-```  
-> [!IMPORTANT]  
-> 注意４）（画面に表示される量が多すぎるので省略するが、`1 .` を各ワード（WORDやINTERPRET等）で解析し、実行していく状況が表示される）  
+![Setup_screen_1-2](https://github.com/MIN0/ToUnderstandForth/blob/main/JPN/Documents/03-02_v0.21.01_JPN/pict/Setup_screen_1-2.png)
+
+
+ 5) Move the cursor to MainEngine9_FIXED.asm listed in “Source Files” in the Solution Explorer and right-click 
+ 6) Click on “Properties” and under “Configuration Properties” and “General  
+````  
+ Under “Exclude from Build,” ``No  
+ Under ````Type of item''' select ```Microsoft Macro Assembler''' and click ```OK.  
+````  
   
-TRACE_ONで表示される情報は実行されているワードの深さによって行の先頭文字の位置が左右にずれて表示される。ワードが実行される時に、登録されていた内部ワードが順次実行されていく。その時に表示される先頭位置が右に1文字ずれ、内部ワードの実行が終了すると表示される先頭位置が左に1文字ずれる。ご参考まで。  
+![Setup_screen_1-3](https://github.com/MIN0/ToUnderstandForth/blob/main/JPN/Documents/03-02_v0.21.01_JPN/pict/Setup_screen_1-3.png)  
   
-# エラーが起こった時の表示例  
-上の１）～３）で示した以外はおかしな動作をするか、忙しくてまだチェックができていないかのどちらかの状態です。ToUnderstandFORTHはまだ開発途上にあります。次はそうした例の一つです。  
+![Setup_screen_1-4](https://github.com/MIN0/ToUnderstandForth/blob/main/JPN/Documents/03-02_v0.21.01_JPN/pict/Setup_screen_1-4.png)  
+
+
   
- １）辞書に新しいワードを登録する（「：」と「；」で囲まれたFORTH文を実行する）際に、処理の途中で何故かToUnderstandFORTHが確保している範囲のアドレス以外をアクセスするために例外エラーを表示しています。処理はリセットされて初期状態に戻ります。  
-```  
-            入力内容：    : TEST_NAME 1 2 + . ;   [enter]   
-　　　　　　 出力内容：WORD_POINTER_ADDRESS(R8):  : =2032203120454d2f  
-                       WRITE_REGISTER_NUMBER(R9):  : =103  
-                       7ff7b6ac2bb0 = 7ff7b6ac8e27  
-                       7ff7b6adc000 = 7ff7b6af5fdf  
-                       BREAK_POINT_Stack 1st : =7ff7b6ac721f  
-                       BREAK_POINT_Stack 2nd : =4e5f54534554203a  
-                       BREAK_POINT_NUMBER : =10403  
-                       PUSH 'Y' KEY TO COLD START  
-```    
+Once setup is complete, execute the following 7) in the following order  
   
-[次のページへ ](./03_02_03_Process_flow_of_ToUnderstandFORTH.MD)  
+ 7) Build (build the solution) → Debug (start debugging)  
+  
+![Execution screen_1-5](https://github.com/MIN0/ToUnderstandForth/blob/main/JPN/Documents/03-02_v0.21.01_JPN/pict/Execution%20screen _1-5.png)  
+  
+![Execution screen_1-6](https://github.com/MIN0/ToUnderstandForth/blob/main/JPN/Documents/03-02_v0.21.01_JPN/pict/Execution%20screen _1-6.png)  
+
+  
+  
+If “ToUnderstandFORTH (Fig-Forth X64) Rev 0.21.01” now appears on the screen, you have succeeded.  
+  
+  
+[Go to the next page ](./03_02_02_A_brief_description_of_ToUnderstandFORTH.MD)  
+
+Translated with DeepL.com (free version)
