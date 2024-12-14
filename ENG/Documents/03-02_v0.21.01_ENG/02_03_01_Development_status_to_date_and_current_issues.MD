@@ -72,9 +72,9 @@ Once setup is complete, execute the following 7) in the following order
   
  7) Build (build the solution) → Debug (start debugging)  
   
-![Execution screen_1-5](https://github.com/MIN0/ToUnderstandForth/blob/main/JPN/Documents/03-02_v0.21.01_JPN/pict/Execution%20screen _1-5.png)  
+![Execution screen_1-5](https://github.com/MIN0/ToUnderstandForth/blob/main/JPN/Documents/03-02_v0.21.01_JPN/pict/Execution%20screen_1-5.png)  
   
-![Execution screen_1-6](https://github.com/MIN0/ToUnderstandForth/blob/main/JPN/Documents/03-02_v0.21.01_JPN/pict/Execution%20screen _1-6.png)  
+![Execution screen_1-6](https://github.com/MIN0/ToUnderstandForth/blob/main/JPN/Documents/03-02_v0.21.01_JPN/pict/Execution%20screen_1-6.png)  
 
   
   
