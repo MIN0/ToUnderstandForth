@@ -1,86 +1,169 @@
-# ◎Development to date and current issues  
-
-## First started with understanding INOUE-FORTH  
--INOUE-FORTH is based on the book “Standard FORTH” published in Japan in the 1980s. For development, I started by manually transcribing this source code from this book.  
--The basic part of INOUE-FORTH was written in MASM (Microsoft Macro Assembler) assembler and the rest in FORTH source code. Therefore, it was very difficult for beginners who were not yet familiar with FORTH to rewrite from these source codes to an executable FORTH processor.    
--I have a lot of respect for those who, back in the 1980s, created their own FORTH processor based on this book alone.  
--In the end, I tried to reproduce INOUE-FORTH, but I could not rewrite the source code written in FORTH into the MASM assembler. The assembler source code that I had created by imitation inevitably produced many errors, and in the end I gave up on continuing the development.  
--However, I learned a lot from the book “Standard FORTH” written by Mr. Inoue. This book gave me valuable information about the FORTH language. Starting with “The ABC's of FORTH,” the book also covers “Internal Structure of the FORTH System,” “FORTH Words,” “How to Create a FORTH Program,” “Extensions to the FORTH Language,” “Implementation of the FORTH System,” and “FORTH83 (Differences between FORTH79 and FORTH83). ),” etc. Without this book, I would not have been able to understand the next FIG-FORTH (8086 edition). It was an important textbook for me. I am grateful for that.  
+# A brief description of ToUnderstandFORTH  
   
--For more information about the document “Standard FORTH”, please refer to the following (however, this document is written only in Japanese)  
-    
-[Documents/01_01_Inoue-Forth_SorceCode](https://github.com/MIN0/ToUnderstandForth/tree/main/JPN/Documents/01_01_Inoue-Forth_ SorceCode)
+Most of the literature I am aware of on FORTH was written around 1990, but some of it is still available. I will only give a brief description here, so please refer to that for more information.
   
-## - Next, we found a PDF document of FIG-FORTH (8086 version) (source code for Intel 8086 CPU version, written entirely in MASM), which was the original of INOUE-FORTH, and changed to development in FIG-FORTH (8086 version) after that.  
+### -Standard FORTH  
+(Japanese only. Available from the Internet Library of Japanese Libraries. Registration is required for use.)
   
--First, it was written only in MASM, and for the first time, error messages that had occurred when compiling the source code were no longer displayed.  
--Second, the initial display screen appeared on the screen normally, and the execution result appeared on the screen after key input and ENTER key input.  
--I confirmed that the title message could now be displayed and changed the name of the program to “ToUnderstandFORTH” in subsequent modifications. Below is the current display screen.  
+[click here to view the library's Japanese language screen](https://ndlsearch.ndl.go.jp/search?cs=bib&collapse=null&display=panel&from=0&size=20& amp;keyword=%E6%A8%99%E6%BA%96FORTH&f-ht=ndl&f-ht=library)  
+  
+[Click here to view the library's English screen](https://ndlsearch.ndl.go.jp/en/search?cs=bib&collapse=null&display=panel& from=0&size=20&keyword=forth+inoue&f-ht=ndl)  
+  
+  
+### -[Starting FORTH ](https://www.forth.com/starting-forth/0-starting-forth/)  
+(This is the web version, so you can read it in your language.)  
+  
+### -[A Beginner's Guide to Forth ](https://galileo.phys.virginia.edu/classes/551.jvn.fall01/primer.htm)  
+(English only)  
+<br>  
+  
+Also, there is a FORTH web developed for MSX (due to circumstances, it has now been moved on my GitHub).  
+  
+### -[H-FORTH_MSX ](https://github.com/MIN0/H-FORTH_MSX)  
+(Japanese and English)  
+<br>  
+  
+  
+# Simple reverse Polish notation and word description  
+## -Normal arithmetic operations are performed in Polish notation, as follows
+````  
+  5+4-3 = 6 
+````  
+However, this is not the case with the FORTH language.
+  
+## -FORTH language is done in reverse Polish notation, using a stack.
+  
+ Numerical operations with FORTH stack operations are as follows
+ (1) The numbers n1 and n2 are piled on the stack.
+ (2) The word "+" takes the numbers n1 and n2 and operates on them. The numbers n1 and n2 disappear from the stack.
+ (3) The numeric value n3 obtained by the word "+" operation is piled on the stack.
+  
+  
+The figure shows the state of the stack at that time. When a number is added to the stack, it is placed on top of the highest number in the diagram, and that number becomes the highest value.
+  
+> [!IMPORTANT].  
+> Note 1) A parenthesis over a number indicates that it is the top of the stack.
+> (Note 2) ----- is the bottom of the stack, indicating that it will be empty when the entire stack is spit out.
+> (Note 3) The non-numeric "+", "-", and "*" here are called words. Words can define and execute the processing of data on the stack and various other processes.
+  
+  
+a)  
+  If `4 3 -`, the result is 4 minus 3 and the result is 1.  
   
 ````  
-       ToUnderstandFORTH (Fig-Forth X64) Rev 0.21.01  
-       <  
-```  
-  
--For more information about the document “FIG-FORTH (8086 version)”, please refer to the following (however, the document is written only in English)  
-  
-[Documents/01_02_Fig-Forth_SorceCode](https://github.com/MIN0/ToUnderstandForth/tree/main/JPN/Documents/01_02_Fig-Forth_SorceCode) 
-  
-  
-  
-## - There are some points to note. 
- I am currently developing in Windows 11 environment with Visual Studio 2022 + MASM (64 bit) in Debug mode.  
- Because of Visual Studio 2022's Debug mode, Project9_FORTH_FULL_FIXED.exe created from 1st_Driver9_FIXED.cpp and MainEngine9_FIXED.asm in /Source only worked on my computer. I could only run it on my PC. It does not work with Visual Studio 2022 on other PCs. If you are reading this article and want to check the operation, you need to prepare Visual Studio 2022 environment on your PC, build and debug it by following the steps below.  
-  
-## <Reference Example>.  
-To make MASM (Microsoft Macro Assembler) work with Visual Studio 2022, you need to start a new project in Visual Studio 2022 and configure the following settings. In this example, the project name is Project9_FullTest_FIXED.  
-  
- (1) Right-click on Project9_FullTest_FIXED, which is marked with a triangle to the left of the “Solution Explorer” on the right side of the screen.  
- (2) In the menu, go to “Build Dependencies (B)” -> “Customize Build” and click the box marked “MASM”, then click “OK”.  
-  
-  
-![Setup_screen_1-1](https://github.com/MIN0/ToUnderstandForth/blob/main/JPN/Documents/03-02_v0.21.01_JPN/pict/Setup_screen_1-1.png)
-
-
-
-
-  
- 3) Right-click on “Source Files” in the Solution Explorer.  
- 4) In the window that appears, select “Add” -> “Existing Items” -> Directory and add the following files.  
-````  
-       1st_Driver9_FIXED.cpp → source code written in C++  
-       MainEngine9_FIXED.asm → source code written in assembler (Intel x64)  
-```  
-  
-![Setup_screen_1-2](https://github.com/MIN0/ToUnderstandForth/blob/main/JPN/Documents/03-02_v0.21.01_JPN/pict/Setup_screen_1-2.png)
-
-
- 5) Move the cursor to MainEngine9_FIXED.asm listed in “Source Files” in the Solution Explorer and right-click 
- 6) Click on “Properties” and under “Configuration Properties” and “General  
-````  
- Under “Exclude from Build,” ``No  
- Under ````Type of item''' select ```Microsoft Macro Assembler''' and click ```OK.  
+             (3)  
+   (4) --> 4 --> - --> (1)  
+  ----- -----  
 ````  
   
-![Setup_screen_1-3](https://github.com/MIN0/ToUnderstandForth/blob/main/JPN/Documents/03-02_v0.21.01_JPN/pict/Setup_screen_1-3.png)  
+b)  
+  If `5 1 +`, then 5 and 1 are added and the result is 6.  
+````   
+             (1)  
+   (5) --> 5 --> + --> (6)  
+  ----- -----  
+````  
   
-![Setup_screen_1-4](https://github.com/MIN0/ToUnderstandForth/blob/main/JPN/Documents/03-02_v0.21.01_JPN/pict/Setup_screen_1-4.png)  
+c)  
+  If `5 4 3 - +`, the process runs from left to right. Three numbers are put on the stack. With the word `-`, the top stack is calculated from the second stack (4 minus 3), and the resulting number 1 is placed on the stack after the numbers 4 and 3 disappear. With the word "+", the top stack is calculated from the second stack (5 and 1 are added), and the resulting number 6 is added to the stack after the numbers 5 and 1 disappear. This is the same as the result of 5 + 4 - 3 in normal Polish notation.
+  
+````    
+                       (5)  
+             (4) 4 (9)  
+   (3) --> 3 --> 3 --> + --> 3 --> - --> (6)  
+  ----- ----- ----- -----  
+````  
+  
+But the explanation is difficult to understand, for example, the order of operations is reversed. I am also pondering whether a better explanation is possible.
+<br>  
+  
+## -This is talking about some words of arithmetic operations, and the number of stacks consumed at runtime and the number of stacks built up afterwards varies from word to word.
+FIG-FORTH uses the following presentation to aid understanding:" Strings written between "(" and ")" are treated as comments and not executed." The left side of " ---" represents the state of the stack before execution and the right side represents the state of the stack after execution.
+  
+   The state of the stack for `( n11 n12 n13 --- n21 n22 )` is as follows.
+  
+````    
+      (n13)  
+       n12   
+       n11  
+      -----     
+At runtime, numbers are taken from the stack in the order n13 --> n12 --> n11.
+````  
+  
+````  
+      (n22)   
+       n21  
+      -----     
+After execution, the numbers are stacked on the stack in the order n21 --> n22.
+````  
+<br>  
+  
+When defining a new word, use the word ":" and the word ";" to define it. For example, when defining word 2SUB1, which subtracts two numbers on the stack and leaves the value on the stack, it can be written as follows
+  
+    `: 2SUB1 ( n1 n2 --- n3 ) - ;`  
+<br>
 
-
-  
-Once setup is complete, execute the following 7) in the following order  
-  
- 7) Build (build the solution) → Debug (start debugging)  
-  
-![Execution screen_1-5](https://github.com/MIN0/ToUnderstandForth/blob/main/JPN/Documents/03-02_v0.21.01_JPN/pict/Execution%20screen _1-5.png)  
-  
-![Execution screen_1-6](https://github.com/MIN0/ToUnderstandForth/blob/main/JPN/Documents/03-02_v0.21.01_JPN/pict/Execution%20screen _1-6.png)  
-
+The relationship between the values n1, n2, and n3 here is `n3 = n1 - n2`.
   
   
-If “ToUnderstandFORTH (Fig-Forth X64) Rev 0.21.01” now appears on the screen, you have succeeded.  
+# Try to move ToUnderstandFORTH.
+  
+## Let's move it  
+-The available PC is Windows. Referring to "Development to date and current issues," start Visual Studio 2022 and click on "Start Debugging (S). After a short time, the command prompt appears and waits for key input after displaying the initial message of FORTH.
+-Keystroke the FORTH word in a row there, and press ENTER at the end.
+-Keyed FORTH word sequence is executed and the word sequence is executed, including displaying characters on the screen.
+-When execution of all keyed-in FORTH word strings is completed, "OK" is displayed on the screen. If an error occurs in the middle of the execution, some message is displayed and "OK" is usually displayed on the screen.
+<br>  
   
   
-[Go to the next page ](./03_02_02_A_brief_description_of_ToUnderstandFORTH.MD)  
-
-Translated with DeepL.com (free version)
+For example, the following is a numerical calculation using "+", "-", and "*".
+［The "Calculate...] displays the calculated results on the screen.
+Calculations here are done in reverse Polish notation, not the usual Polish notation.
+````    
+  4 5 + . [ENTER] --> 9 OK Add 4 and 5 
+  3 4 5 + - . [ENTER] --> -6 OK Add 4 and 5. Then subtract the result from 3.
+  2 3 4 5 + - * . [ENTER] --> -12 OK Add 4 and 5, subtract the result from 3. Then multiply 2 by the result.
+````    
+<br>  
+  
+# Words currently confirmed to run successfully in ToUnderstandFORTH  
+  
+So far, the words that can be successfully executed are as follows
+  
+ (1) Numerical values, "+", "-", "*", ". (dot) are used, normal results are displayed.
+````  
+        Example: Enter: 1 2 + . [enter].    
+              Output contents: 3 OK  
+````  
+  
+ (2) The string is displayed on the screen.
+````  
+              Enter: ." Hello!" [enter].   
+              Output content: Hello!   
+````  
+  
+ (3) The words `TRACE_ON` and `TRACE_OFF` are newly created words that toggle "display/not display" of the currently executed word name, registers in use, and other information on the screen.
+````  
+ Example: Enter: TRACE_ON 1 . TRACE_OFF [enter].   
+　　　(Output contents: seenote 4)  
+````  
+> [!IMPORTANT].  
+> (Note 4) (Too much to display on the screen, so I will omit it, but `1 . ` is parsed by each word (WORD, INTERPRET, etc.) and the status of execution is displayed)  
+  
+The information displayed in TRACE_ON is displayed with the position of the first character of the line shifted to the left or right depending on the depth of the word being executed. When a word is executed, the registered internal words are executed one after another. At that time, the displayed first character position is shifted one character to the right, and when the execution of the internal word is completed, the displayed first character position is shifted one character to the left. For your reference.
+  
+# Example of display when an error occurs  
+ToUnderstandFORTH is still under development. The following is one such example.
+  
+ (1) When registering a new word in the dictionary (executing a FORTH statement surrounded by ":" and ";"), an exception error is displayed because for some reason ToUnderstandFORTH accesses an address other than the range of addresses it reserves during processing. The process is reset and returns to the initial state.
+````  
+            Enter: : TEST_NAME 1 2 + . ; [enter].   
+　　　　　　 Output contents: WORD_POINTER_ADDRESS(R8): : =2032203120454d2f  
+                       WRITE_REGISTER_NUMBER(R9): : =103  
+                       7ff7b6ac2bb0 = 7ff7b6ac8e27  
+                       7ff7b6adc000 = 7ff7b6af5fdf  
+                       BREAK_POINT_Stack 1st : =7ff7b6ac721f  
+                       BREAK_POINT_Stack 2nd : =4e5f54534554203a  
+                       break_point_number : =10403  
+                       PUSH 'Y' KEY TO COLD START  
+````    
