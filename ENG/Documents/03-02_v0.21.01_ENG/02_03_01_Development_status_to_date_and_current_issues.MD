@@ -19,7 +19,7 @@
   
 ```  
        ToUnderstandFORTH (Fig-Forth X64) Rev 0.21.01  
-       * Waiting for key input here. *  
+       <--(Waiting for key input here)  
 ```  
   
 -For more information about the document “FIG-FORTH (8086 version)”, please refer to the following (however, the document is written only in English)  
