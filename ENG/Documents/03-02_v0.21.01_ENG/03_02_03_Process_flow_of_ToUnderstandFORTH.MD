@@ -90,7 +90,7 @@ The following procedure is performed when the initial state of ToUnderstandFORTH
 When the input string has been executed to the end (or an error occurs), “OK” (or error information) is displayed on the screen and the program waits for key input. 
   
   
-For reference, I've included a part of the source code for INOUE-FORTH (although the machine language is the x64 version). This is the source code when it hasn't been modified much, so there are a few bugs... 
+For reference, I've included a part of the source code for INOUE-FORTH (although the machine language is the 8086 version). This is the source code when it hasn't been modified much, so there are a few bugs... 
   
 ``` 
 ; COLD STATE VECTOR COMES HERE  
