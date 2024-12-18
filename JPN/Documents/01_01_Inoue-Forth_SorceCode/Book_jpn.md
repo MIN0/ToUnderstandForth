@@ -2,7 +2,7 @@
   
 "標準FORTH" (standard FORTH) Toshio Inoue 著  
 共立出版株式会社（絶版）　１９８５年出版  
-https://ndlsearch.ndl.go.jp/en/books/R100000002-I000001755527  
+https://ndlsearch.ndl.go.jp/jp/books/R100000002-I000001755527  
   
 国立国会図書館サーチ  
 （serch keyward: "forth inoue"）  
