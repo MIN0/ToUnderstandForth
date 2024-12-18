@@ -54,7 +54,7 @@ Visual Studio 2022でMASM(Microsoft Macro Assembler)を動かせるようにす�
 ![Setup_screen_1-2](https://github.com/MIN0/ToUnderstandForth/blob/main/JPN/Documents/03-02_v0.21.01_JPN/pict/Setup_screen_1-2.png)
 
 
-　５）ソリューションエクスプローラーの「ソースファイル」に表示されているMainEngine9_FIXED.asmにカーソルを合わせて右クリック 
+　５）ソリューションエクスプローラーの「ソースファイル」に表示されているMainEngine9_FIXED.asmにカーソルを合わせて右クリック  
 　６）「プロパティ」をクリックして、「構成プロパティ」「全般」で  
 ```  
 　　　　　　「ビルドから除外」で「いいえ」  
