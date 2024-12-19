@@ -25,7 +25,7 @@ The data length stored in LF, CF, and PF is 2 bytes (8 bytes in ToUnderstandFORT
 The following is an example (only a part) of a word “CALC”.  
   
   
-![ ... ](/JPN/Documents/03_01_v0.20.01_JPN/NFR.png) 
+![ ... ](./pict/NFR_eng.png) 
   
   
 ## (2) Structure of the internal interpreter  
