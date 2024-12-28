@@ -48,8 +48,8 @@ To make MASM (Microsoft Macro Assembler) work with Visual Studio 2022, you need 
  3) Right-click on “Source Files” in the Solution Explorer.  
  4) In the window that appears, select “Add” -> “Existing Items” -> Directory and add the following files.  
 ```  
-       1st_Driver9_FIXED.cpp → source code written in C++  
-       MainEngine9_FIXED.asm → source code written in assembler (Intel x64)  
+       1st_Driver10_FIXED.cpp → source code written in C++  
+       MainEngine10_FIXED.asm → source code written in assembler (Intel x64)  
 ```  
   
 ![Setup_screen_1-2](https://github.com/MIN0/ToUnderstandForth/blob/main/JPN/Documents/03-02_v0.21.01_JPN/pict/Setup_screen_1-2.png)
@@ -78,7 +78,7 @@ Once setup is complete, execute the following 7) in the following order
 
   
   
-If “ToUnderstandFORTH (Fig-Forth X64) Rev 0.21.01” now appears on the screen, you have succeeded.  
+If “ToUnderstandFORTH (Fig-Forth X64) Rev 0.21.02” now appears on the screen, you have succeeded.  
   
   
 [Go to the next page ](./03_02_02_A_brief_description_of_ToUnderstandFORTH.MD)  
