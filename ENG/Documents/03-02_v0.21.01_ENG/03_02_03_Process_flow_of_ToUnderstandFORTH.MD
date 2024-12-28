@@ -139,5 +139,5 @@ All of the basic operation is done in the word `QUIT` alone. What is interesting
 I used to think that program processing was a call from a main routine to a subroutine (equivalent to CALL processing), and that it always returned to the main routine when the subroutine was finished. FORTH seems to have taken a different path. when FORTH moves from word to word, it once jumps to `FORTH_INNER_INTERPRETER` (equivalent to JUMP processing) and then jumps to the next word (equivalent to JUMP processing). word (equivalent to JUMP processing) and then jumps to the next word (equivalent to JUMP processing).  
 Therefore, I feel that there is no hierarchical relationship between words, such as main and sub, but rather equal and independent between words. Maybe I am mistaken, as no one has said so. But I like the unique aspects of this FORTH language that has taken its own path.  
         
-[To this directory](./) 
+[To this directory](./)  
 [To the home screen](../../../README_ENG.md)  
