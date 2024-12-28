@@ -18,7 +18,7 @@
 　私はタイトルメッセージの表示ができるようになったのを確認して、それ以降の修正ではプログラムの名称を「ToUnderstandFORTH」に変更しました。以下は現在の表示画面です。  
 　　  
 ```  
-       ToUnderstandFORTH  (Fig-Forth X64) Rev 0.21.01  
+       ToUnderstandFORTH  (Fig-Forth X64) Rev 0.21.02  
 　　　　＜ここでキー入力待ちとなる＞  
 ```  
   
@@ -29,12 +29,12 @@
   
   
 ## ・注意すべき点があります。現在はWindows11の環境で、Visual Studio 2022 + MASM（６４ビット）のDebugモードで開発しています。  
-　Visual Studio 2022 のDebugモードなので、/Sourceにある1st_Driver9_FIXED.cppやMainEngine9_FIXED.asmから作成したProject9_FORTH_FULL_FIXED.exeは私が使っているパソコン上でしか動作しませんでした。他のPC上のVisual Studio 2022では動作しません。この記事を読んでいる方で動作を確認するときは、あなたのPCでVisual Studio 2022の環境を準備し、以下の手順でビルドを行い、デバッグを行う必要があります。  
+　Visual Studio 2022 のDebugモードなので、/Sourceにある1st_Driver10_FIXED.cppやMainEngine10_FIXED.asmから作成したProject10_FORTH_FULL_FIXED.exeは私が使っているパソコン上でしか動作しませんでした。他のPC上のVisual Studio 2022では動作しません。この記事を読んでいる方で動作を確認するときは、あなたのPCでVisual Studio 2022の環境を準備し、以下の手順でビルドを行い、デバッグを行う必要があります。  
   
 ## ＜参考例＞  
-Visual Studio 2022でMASM(Microsoft Macro Assembler)を動かせるようにするには、Visual Studio 2022で新規プロジェクトを立ち上げてから以下の設定をおこなう必要があります。ここではプロジェクト名はProject9_FullTest_FIXEDとします。  
+Visual Studio 2022でMASM(Microsoft Macro Assembler)を動かせるようにするには、Visual Studio 2022で新規プロジェクトを立ち上げてから以下の設定をおこなう必要があります。ここではプロジェクト名はToUnderstandFORT_v0.21.02とします。  
   
-　１）画面右側の「ソリューションエクスプローラー」の左に三角形のマークがついたProject9_FullTest_FIXEDを右クリック  
+　１）画面右側の「ソリューションエクスプローラー」の左に三角形のマークがついたToUnderstandFORT_v0.21.02を右クリック  
 　２）メニュー内の「ビルドの依存関係（B)」→「ビルドのカスタマイズ」で「MASM」と書かれたボックスをクリック、「OK」をクリックする。  
   
   
@@ -47,8 +47,8 @@ Visual Studio 2022でMASM(Microsoft Macro Assembler)を動かせるようにす�
 　３）ソリューションエクスプローラーで「ソースファイル」を右クリック  
 　４）現れたウインドウで「追加」→「既存の項目」→ディレクトリを選んで以下のファイルを追加していく。  
 ```  
-       1st_Driver9_FIXED.cpp　　 　→C++で書かれたソースコード  
-　　　　MainEngine9_FIXED.asm　　　→アセンブラ（インテルｘ６４）で書かれたソースコード  
+       1st_Driver10_FIXED.cpp　　 　→C++で書かれたソースコード  
+　　　　MainEngine10_FIXED.asm　　　→アセンブラ（インテルｘ６４）で書かれたソースコード  
 ```  
   
 ![Setup_screen_1-2](https://github.com/MIN0/ToUnderstandForth/blob/main/JPN/Documents/03-02_v0.21.01_JPN/pict/Setup_screen_1-2.png)
@@ -76,7 +76,7 @@ Visual Studio 2022でMASM(Microsoft Macro Assembler)を動かせるようにす�
 
   
   
-これで「 ToUnderstandFORTH  (Fig-Forth X64) Rev 0.21.01 」が画面に表示されれば成功です。  
+これで「 ToUnderstandFORTH  (Fig-Forth X64) Rev 0.21.02 」が画面に表示されれば成功です。  
   
   
 [次のページへ ](./03_02_02_A_brief_description_of_ToUnderstandFORTH.MD)  
