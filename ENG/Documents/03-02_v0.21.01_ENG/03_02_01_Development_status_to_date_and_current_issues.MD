@@ -18,7 +18,7 @@
 -I confirmed that the title message could now be displayed and changed the name of the program to “ToUnderstandFORTH” in subsequent modifications. Below is the current display screen.  
   
 ```  
-       ToUnderstandFORTH (Fig-Forth X64) Rev 0.21.01  
+       ToUnderstandFORTH (Fig-Forth X64) Rev 0.21.02  
        <--(Waiting for key input here)  
 ```  
   
@@ -30,12 +30,12 @@
   
 ## There are some points to note. 
  I am currently developing in Windows 11 environment with Visual Studio 2022 + MASM (64 bit) in Debug mode.  
- Because of Visual Studio 2022's Debug mode, Project9_FORTH_FULL_FIXED.exe created from 1st_Driver9_FIXED.cpp and MainEngine9_FIXED.asm in "/Source" only worked on my computer. I could only run it on my PC. It does not work with Visual Studio 2022 on other PCs. If you are reading this article and want to check the operation, you need to prepare Visual Studio 2022 environment on your PC, build and debug it by following the steps below.  
+ Because of Visual Studio 2022's Debug mode, Project10_FORTH_FULL_FIXED.exe created from 1st_Driver10_FIXED.cpp and MainEngine10_FIXED.asm in "/Source" only worked on my computer. I could only run it on my PC. It does not work with Visual Studio 2022 on other PCs. If you are reading this article and want to check the operation, you need to prepare Visual Studio 2022 environment on your PC, build and debug it by following the steps below.  
   
 ## Reference Example.  
-To make MASM (Microsoft Macro Assembler) work with Visual Studio 2022, you need to start a new project in Visual Studio 2022 and configure the following settings. In this example, the project name is Project9_FullTest_FIXED.  
+To make MASM (Microsoft Macro Assembler) work with Visual Studio 2022, you need to start a new project in Visual Studio 2022 and configure the following settings. In this example, the project name is ToUnderstandFORTH_v0.21.02.  
   
- (1) Right-click on Project9_FullTest_FIXED, which is marked with a triangle to the left of the “Solution Explorer” on the right side of the screen.  
+ (1) Right-click on ToUnderstandFORTH_v0.21.02, which is marked with a triangle to the left of the “Solution Explorer” on the right side of the screen.  
  (2) In the menu, go to “Build Dependencies (B)” -> “Customize Build” and click the box marked “MASM”, then click “OK”.  
   
   
