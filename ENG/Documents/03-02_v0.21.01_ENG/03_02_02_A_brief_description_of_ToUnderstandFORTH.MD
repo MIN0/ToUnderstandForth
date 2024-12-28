@@ -5,9 +5,9 @@ Most of the literature I am aware of on FORTH was written around 1990, but some 
 ### -Standard FORTH  
 (Japanese only. Available from the Internet Library of Japanese Libraries. Registration is required for use.)
   
-[click here to view the library's Japanese language screen](https://ndlsearch.ndl.go.jp/search?cs=bib&collapse=null&display=panel&from=0&size=20& amp;keyword=%E6%A8%99%E6%BA%96FORTH&f-ht=ndl&f-ht=library)    
+[click here to view the library's Japanese language screen](https://ndlsearch.ndl.go.jp/search?cs=bib&collapse=null&display=panel&from=0&size=20&amp;keyword=%E6%A8%99%E6%BA%96FORTH&f-ht=ndl&f-ht=library)    
   
-[Click here to view the library's English screen](https://ndlsearch.ndl.go.jp/en/search?cs=bib&collapse=null&display=panel& from=0&size=20&keyword=forth+inoue&f-ht=ndl)  
+[Click here to view the library's English screen](https://ndlsearch.ndl.go.jp/en/search?cs=bib&collapse=null&display=panel&from=0&size=20&keyword=forth+inoue&f-ht=ndl)  
   
   
 ### -[Starting FORTH ](https://www.forth.com/starting-forth/0-starting-forth/)  
