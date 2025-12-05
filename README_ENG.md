@@ -10,7 +10,13 @@ The source code of ToUnderstandForth is divided into cpp and asm formats, and de
 
 The source code I am creating is made up of only basic functionality for the FORTH system. The only things that have been confirmed to work at this time are numerical operations and message display. It also has a trace function to examine execution status.
 What I am doing now is to develop a basic FORTH system to understand how ToUnderstandForth works, and if it gets people interested in FORTH, I consider it a success. The next development will be to develop a more flexible FORTH system.  
-    
+  
+  Notice:  
+I have now created a 64-bit version of “forth-DWC” (under preparation), developed by CCurl based on the ideas of the new FORTH system “Color Forth”.  
+I have confirmed it runs on the following environments:  
+Ubuntu 64-bit, Debian 64-bit, Windows 10/11 (CygWin and WSL only)  
+  
 [Go to latest directory “03-02_v0.21.01”](./ENG/Documents/03-02_v0.21.01_ENG/README.md)  
   
 Translated with DeepL.com (free version)
+
